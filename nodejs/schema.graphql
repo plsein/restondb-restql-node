@@ -1,0 +1,3966 @@
+directive @extends on OBJECT | INTERFACE
+
+directive @external on FIELD_DEFINITION
+
+directive @requires(fields: _FieldSet!) on FIELD_DEFINITION
+
+directive @provides(fields: _FieldSet!) on FIELD_DEFINITION
+
+directive @key(fields: _FieldSet!) on OBJECT | INTERFACE
+
+"""The root query type which gives access points into the data universe."""
+type Query implements Node {
+  """
+  The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.
+  """
+  nodeId: ID!
+
+  """Fetches an object given its globally unique `ID`."""
+  node(
+    """The globally unique `ID`."""
+    nodeId: ID!
+  ): Node
+
+  """Reads and enables pagination through a set of `Company`."""
+  companies(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Company`."""
+    orderBy: [CompaniesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: CompanyCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: CompanyFilter
+  ): CompaniesConnection
+
+  """Reads and enables pagination through a set of `Department`."""
+  departments(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Department`."""
+    orderBy: [DepartmentsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: DepartmentCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: DepartmentFilter
+  ): DepartmentsConnection
+
+  """Reads and enables pagination through a set of `Employee`."""
+  employees(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Employee`."""
+    orderBy: [EmployeesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EmployeeCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EmployeeFilter
+  ): EmployeesConnection
+
+  """Reads and enables pagination through a set of `Sale`."""
+  sales(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Sale`."""
+    orderBy: [SalesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: SaleCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: SaleFilter
+  ): SalesConnection
+  company(companyId: BigInt!): Company
+  companyByCompanyName(companyName: String!): Company
+  department(departmentId: BigInt!): Department
+  departmentByDepartmentName(departmentName: String!): Department
+  employee(employeeId: BigInt!): Employee
+  sale(salesId: BigInt!): Sale
+
+  """Reads a single `Company` using its globally unique `ID`."""
+  companyByNodeId(
+    """The globally unique `ID` to be used in selecting a single `Company`."""
+    nodeId: ID!
+  ): Company
+
+  """Reads a single `Department` using its globally unique `ID`."""
+  departmentByNodeId(
+    """
+    The globally unique `ID` to be used in selecting a single `Department`.
+    """
+    nodeId: ID!
+  ): Department
+
+  """Reads a single `Employee` using its globally unique `ID`."""
+  employeeByNodeId(
+    """The globally unique `ID` to be used in selecting a single `Employee`."""
+    nodeId: ID!
+  ): Employee
+
+  """Reads a single `Sale` using its globally unique `ID`."""
+  saleByNodeId(
+    """The globally unique `ID` to be used in selecting a single `Sale`."""
+    nodeId: ID!
+  ): Sale
+
+  """
+  Fetches a list of entities using their representations; used for Apollo
+  Federation.
+  """
+  _entities(representations: [_Any!]!): [_Entity]! @deprecated(reason: "Only Apollo Federation should use this")
+
+  """
+  Entrypoint for Apollo Federation to determine more information about
+  this service.
+  """
+  _service: _Service! @deprecated(reason: "Only Apollo Federation should use this")
+}
+
+"""An object with a globally unique `ID`."""
+interface Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+}
+
+"""A connection to a list of `Company` values."""
+type CompaniesConnection {
+  """A list of `Company` objects."""
+  nodes: [Company!]!
+
+  """
+  A list of edges which contains the `Company` and cursor to aid in pagination.
+  """
+  edges: [CompaniesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Company` you could get from the connection."""
+  totalCount: Int!
+
+  """
+  Aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  aggregates: CompanyAggregates
+}
+
+type Company implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  companyId: BigInt!
+  companyName: String!
+
+  """Reads and enables pagination through a set of `Department`."""
+  departments(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Department`."""
+    orderBy: [DepartmentsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: DepartmentCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: DepartmentFilter
+  ): DepartmentsConnection!
+}
+
+"""
+A signed eight-byte integer. The upper big integer values are greater than the
+max value for a JavaScript number. Therefore all big integers will be output as
+strings and not numbers.
+"""
+scalar BigInt
+
+"""A connection to a list of `Department` values."""
+type DepartmentsConnection {
+  """A list of `Department` objects."""
+  nodes: [Department!]!
+
+  """
+  A list of edges which contains the `Department` and cursor to aid in pagination.
+  """
+  edges: [DepartmentsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Department` you could get from the connection."""
+  totalCount: Int!
+
+  """
+  Aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  aggregates: DepartmentAggregates
+
+  """
+  Grouped aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  groupedAggregates(
+    """The method to use when grouping `Department` for these aggregates."""
+    groupBy: [DepartmentGroupBy!]!
+
+    """Conditions on the grouped aggregates."""
+    having: DepartmentHavingInput
+  ): [DepartmentAggregates!]
+}
+
+type Department implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  departmentId: BigInt!
+  companyId: BigInt!
+  departmentName: String!
+
+  """Reads a single `Company` that is related to this `Department`."""
+  company: Company
+
+  """Reads and enables pagination through a set of `Employee`."""
+  employees(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Employee`."""
+    orderBy: [EmployeesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: EmployeeCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: EmployeeFilter
+  ): EmployeesConnection!
+}
+
+"""A connection to a list of `Employee` values."""
+type EmployeesConnection {
+  """A list of `Employee` objects."""
+  nodes: [Employee!]!
+
+  """
+  A list of edges which contains the `Employee` and cursor to aid in pagination.
+  """
+  edges: [EmployeesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Employee` you could get from the connection."""
+  totalCount: Int!
+
+  """
+  Aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  aggregates: EmployeeAggregates
+
+  """
+  Grouped aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  groupedAggregates(
+    """The method to use when grouping `Employee` for these aggregates."""
+    groupBy: [EmployeeGroupBy!]!
+
+    """Conditions on the grouped aggregates."""
+    having: EmployeeHavingInput
+  ): [EmployeeAggregates!]
+}
+
+type Employee implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  employeeId: BigInt!
+  departmentId: BigInt!
+  employeeName: String!
+  employeeEmail: String!
+  employeeAge: Int!
+  employeePost: String!
+  employeeBasic: Int!
+  joiningDate: Datetime!
+  status: Boolean!
+
+  """Reads a single `Department` that is related to this `Employee`."""
+  department: Department
+
+  """Reads and enables pagination through a set of `Sale`."""
+  salesBySalesPersonId(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Sale`."""
+    orderBy: [SalesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: SaleCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: SaleFilter
+  ): SalesConnection!
+}
+
+"""
+A point in time as described by the [ISO
+8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
+"""
+scalar Datetime
+
+"""A connection to a list of `Sale` values."""
+type SalesConnection {
+  """A list of `Sale` objects."""
+  nodes: [Sale!]!
+
+  """
+  A list of edges which contains the `Sale` and cursor to aid in pagination.
+  """
+  edges: [SalesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Sale` you could get from the connection."""
+  totalCount: Int!
+
+  """
+  Aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  aggregates: SaleAggregates
+
+  """
+  Grouped aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  groupedAggregates(
+    """The method to use when grouping `Sale` for these aggregates."""
+    groupBy: [SalesGroupBy!]!
+
+    """Conditions on the grouped aggregates."""
+    having: SalesHavingInput
+  ): [SaleAggregates!]
+}
+
+type Sale implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  salesId: BigInt!
+
+  """
+  {"Validations": {"StringLengthValidation": {"params":{"min":2, "max":50}, "msg":"Length must be between 2 to 50"} }}
+  """
+  productName: String!
+  price: Float!
+  customerName: String!
+  salesPersonId: BigInt!
+  saleDate: Datetime!
+
+  """Reads a single `Employee` that is related to this `Sale`."""
+  salesPerson: Employee
+}
+
+"""A `Sale` edge in the connection."""
+type SalesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Sale` at the end of the edge."""
+  node: Sale!
+}
+
+"""A location in a connection that can be used for resuming pagination."""
+scalar Cursor
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
+}
+
+type SaleAggregates {
+  keys: [String!]
+
+  """
+  Sum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  sum: SaleSumAggregates
+
+  """
+  Distinct count aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  distinctCount: SaleDistinctCountAggregates
+
+  """
+  Minimum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  min: SaleMinAggregates
+
+  """
+  Maximum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  max: SaleMaxAggregates
+
+  """
+  Mean average aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  average: SaleAverageAggregates
+
+  """
+  Sample standard deviation aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  stddevSample: SaleStddevSampleAggregates
+
+  """
+  Population standard deviation aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  stddevPopulation: SaleStddevPopulationAggregates
+
+  """
+  Sample variance aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  varianceSample: SaleVarianceSampleAggregates
+
+  """
+  Population variance aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  variancePopulation: SaleVariancePopulationAggregates
+}
+
+type SaleSumAggregates {
+  """Sum of salesId across the matching connection"""
+  salesId: BigFloat!
+
+  """Sum of price across the matching connection"""
+  price: Float!
+
+  """Sum of salesPersonId across the matching connection"""
+  salesPersonId: BigFloat!
+}
+
+"""
+A floating point number that requires more precision than IEEE 754 binary 64
+"""
+scalar BigFloat
+
+type SaleDistinctCountAggregates {
+  """Distinct count of salesId across the matching connection"""
+  salesId: BigInt
+
+  """Distinct count of productName across the matching connection"""
+  productName: BigInt
+
+  """Distinct count of price across the matching connection"""
+  price: BigInt
+
+  """Distinct count of customerName across the matching connection"""
+  customerName: BigInt
+
+  """Distinct count of salesPersonId across the matching connection"""
+  salesPersonId: BigInt
+
+  """Distinct count of saleDate across the matching connection"""
+  saleDate: BigInt
+}
+
+type SaleMinAggregates {
+  """Minimum of salesId across the matching connection"""
+  salesId: BigInt
+
+  """Minimum of price across the matching connection"""
+  price: Float
+
+  """Minimum of salesPersonId across the matching connection"""
+  salesPersonId: BigInt
+}
+
+type SaleMaxAggregates {
+  """Maximum of salesId across the matching connection"""
+  salesId: BigInt
+
+  """Maximum of price across the matching connection"""
+  price: Float
+
+  """Maximum of salesPersonId across the matching connection"""
+  salesPersonId: BigInt
+}
+
+type SaleAverageAggregates {
+  """Mean average of salesId across the matching connection"""
+  salesId: BigFloat
+
+  """Mean average of price across the matching connection"""
+  price: Float
+
+  """Mean average of salesPersonId across the matching connection"""
+  salesPersonId: BigFloat
+}
+
+type SaleStddevSampleAggregates {
+  """Sample standard deviation of salesId across the matching connection"""
+  salesId: BigFloat
+
+  """Sample standard deviation of price across the matching connection"""
+  price: Float
+
+  """
+  Sample standard deviation of salesPersonId across the matching connection
+  """
+  salesPersonId: BigFloat
+}
+
+type SaleStddevPopulationAggregates {
+  """
+  Population standard deviation of salesId across the matching connection
+  """
+  salesId: BigFloat
+
+  """Population standard deviation of price across the matching connection"""
+  price: Float
+
+  """
+  Population standard deviation of salesPersonId across the matching connection
+  """
+  salesPersonId: BigFloat
+}
+
+type SaleVarianceSampleAggregates {
+  """Sample variance of salesId across the matching connection"""
+  salesId: BigFloat
+
+  """Sample variance of price across the matching connection"""
+  price: Float
+
+  """Sample variance of salesPersonId across the matching connection"""
+  salesPersonId: BigFloat
+}
+
+type SaleVariancePopulationAggregates {
+  """Population variance of salesId across the matching connection"""
+  salesId: BigFloat
+
+  """Population variance of price across the matching connection"""
+  price: Float
+
+  """Population variance of salesPersonId across the matching connection"""
+  salesPersonId: BigFloat
+}
+
+"""Grouping methods for `Sale` for usage during aggregation."""
+enum SalesGroupBy {
+  PRODUCT_NAME
+  PRICE
+  CUSTOMER_NAME
+  SALES_PERSON_ID
+  SALE_DATE
+  SALE_DATE_TRUNCATED_TO_YEAR
+  SALE_DATE_TRUNCATED_TO_QUARTER
+  SALE_DATE_TRUNCATED_TO_MONTH
+  SALE_DATE_TRUNCATED_TO_WEEK
+  SALE_DATE_TRUNCATED_TO_DAY
+  SALE_DATE_TRUNCATED_TO_HOUR
+}
+
+"""Conditions for `Sale` aggregates."""
+input SalesHavingInput {
+  AND: [SalesHavingInput!]
+  OR: [SalesHavingInput!]
+  sum: SalesHavingSumInput
+  distinctCount: SalesHavingDistinctCountInput
+  min: SalesHavingMinInput
+  max: SalesHavingMaxInput
+  average: SalesHavingAverageInput
+  stddevSample: SalesHavingStddevSampleInput
+  stddevPopulation: SalesHavingStddevPopulationInput
+  varianceSample: SalesHavingVarianceSampleInput
+  variancePopulation: SalesHavingVariancePopulationInput
+}
+
+input SalesHavingSumInput {
+  salesId: HavingBigintFilter
+  price: HavingFloatFilter
+  salesPersonId: HavingBigintFilter
+  saleDate: HavingDatetimeFilter
+}
+
+input HavingBigintFilter {
+  equalTo: BigInt
+  notEqualTo: BigInt
+  greaterThan: BigInt
+  greaterThanOrEqualTo: BigInt
+  lessThan: BigInt
+  lessThanOrEqualTo: BigInt
+}
+
+input HavingFloatFilter {
+  equalTo: Float
+  notEqualTo: Float
+  greaterThan: Float
+  greaterThanOrEqualTo: Float
+  lessThan: Float
+  lessThanOrEqualTo: Float
+}
+
+input HavingDatetimeFilter {
+  equalTo: Datetime
+  notEqualTo: Datetime
+  greaterThan: Datetime
+  greaterThanOrEqualTo: Datetime
+  lessThan: Datetime
+  lessThanOrEqualTo: Datetime
+}
+
+input SalesHavingDistinctCountInput {
+  salesId: HavingBigintFilter
+  price: HavingFloatFilter
+  salesPersonId: HavingBigintFilter
+  saleDate: HavingDatetimeFilter
+}
+
+input SalesHavingMinInput {
+  salesId: HavingBigintFilter
+  price: HavingFloatFilter
+  salesPersonId: HavingBigintFilter
+  saleDate: HavingDatetimeFilter
+}
+
+input SalesHavingMaxInput {
+  salesId: HavingBigintFilter
+  price: HavingFloatFilter
+  salesPersonId: HavingBigintFilter
+  saleDate: HavingDatetimeFilter
+}
+
+input SalesHavingAverageInput {
+  salesId: HavingBigintFilter
+  price: HavingFloatFilter
+  salesPersonId: HavingBigintFilter
+  saleDate: HavingDatetimeFilter
+}
+
+input SalesHavingStddevSampleInput {
+  salesId: HavingBigintFilter
+  price: HavingFloatFilter
+  salesPersonId: HavingBigintFilter
+  saleDate: HavingDatetimeFilter
+}
+
+input SalesHavingStddevPopulationInput {
+  salesId: HavingBigintFilter
+  price: HavingFloatFilter
+  salesPersonId: HavingBigintFilter
+  saleDate: HavingDatetimeFilter
+}
+
+input SalesHavingVarianceSampleInput {
+  salesId: HavingBigintFilter
+  price: HavingFloatFilter
+  salesPersonId: HavingBigintFilter
+  saleDate: HavingDatetimeFilter
+}
+
+input SalesHavingVariancePopulationInput {
+  salesId: HavingBigintFilter
+  price: HavingFloatFilter
+  salesPersonId: HavingBigintFilter
+  saleDate: HavingDatetimeFilter
+}
+
+"""Methods to use when ordering `Sale`."""
+enum SalesOrderBy {
+  NATURAL
+  SALES_ID_ASC
+  SALES_ID_DESC
+  PRODUCT_NAME_ASC
+  PRODUCT_NAME_DESC
+  PRICE_ASC
+  PRICE_DESC
+  CUSTOMER_NAME_ASC
+  CUSTOMER_NAME_DESC
+  SALES_PERSON_ID_ASC
+  SALES_PERSON_ID_DESC
+  SALE_DATE_ASC
+  SALE_DATE_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `Sale` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input SaleCondition {
+  """Checks for equality with the object’s `salesId` field."""
+  salesId: BigInt
+
+  """Checks for equality with the object’s `productName` field."""
+  productName: String
+
+  """Checks for equality with the object’s `price` field."""
+  price: Float
+
+  """Checks for equality with the object’s `customerName` field."""
+  customerName: String
+
+  """Checks for equality with the object’s `salesPersonId` field."""
+  salesPersonId: BigInt
+
+  """Checks for equality with the object’s `saleDate` field."""
+  saleDate: Datetime
+}
+
+"""
+A filter to be used against `Sale` object types. All fields are combined with a logical ‘and.’
+"""
+input SaleFilter {
+  """Filter by the object’s `salesId` field."""
+  salesId: BigIntFilter
+
+  """Filter by the object’s `productName` field."""
+  productName: StringFilter
+
+  """Filter by the object’s `price` field."""
+  price: FloatFilter
+
+  """Filter by the object’s `customerName` field."""
+  customerName: StringFilter
+
+  """Filter by the object’s `salesPersonId` field."""
+  salesPersonId: BigIntFilter
+
+  """Filter by the object’s `saleDate` field."""
+  saleDate: DatetimeFilter
+
+  """Filter by the object’s `salesPerson` relation."""
+  salesPerson: EmployeeFilter
+
+  """Checks for all expressions in this list."""
+  and: [SaleFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [SaleFilter!]
+
+  """Negates the expression."""
+  not: SaleFilter
+}
+
+"""
+A filter to be used against BigInt fields. All fields are combined with a logical ‘and.’
+"""
+input BigIntFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: BigInt
+
+  """Not equal to the specified value."""
+  notEqualTo: BigInt
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: BigInt
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: BigInt
+
+  """Included in the specified list."""
+  in: [BigInt!]
+
+  """Not included in the specified list."""
+  notIn: [BigInt!]
+
+  """Less than the specified value."""
+  lessThan: BigInt
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: BigInt
+
+  """Greater than the specified value."""
+  greaterThan: BigInt
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: BigInt
+}
+
+"""
+A filter to be used against String fields. All fields are combined with a logical ‘and.’
+"""
+input StringFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: String
+
+  """Not equal to the specified value."""
+  notEqualTo: String
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: String
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: String
+
+  """Included in the specified list."""
+  in: [String!]
+
+  """Not included in the specified list."""
+  notIn: [String!]
+
+  """Less than the specified value."""
+  lessThan: String
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: String
+
+  """Greater than the specified value."""
+  greaterThan: String
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: String
+
+  """Contains the specified string (case-sensitive)."""
+  includes: String
+
+  """Does not contain the specified string (case-sensitive)."""
+  notIncludes: String
+
+  """Contains the specified string (case-insensitive)."""
+  includesInsensitive: String
+
+  """Does not contain the specified string (case-insensitive)."""
+  notIncludesInsensitive: String
+
+  """Starts with the specified string (case-sensitive)."""
+  startsWith: String
+
+  """Does not start with the specified string (case-sensitive)."""
+  notStartsWith: String
+
+  """Starts with the specified string (case-insensitive)."""
+  startsWithInsensitive: String
+
+  """Does not start with the specified string (case-insensitive)."""
+  notStartsWithInsensitive: String
+
+  """Ends with the specified string (case-sensitive)."""
+  endsWith: String
+
+  """Does not end with the specified string (case-sensitive)."""
+  notEndsWith: String
+
+  """Ends with the specified string (case-insensitive)."""
+  endsWithInsensitive: String
+
+  """Does not end with the specified string (case-insensitive)."""
+  notEndsWithInsensitive: String
+
+  """
+  Matches the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.
+  """
+  like: String
+
+  """
+  Does not match the specified pattern (case-sensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.
+  """
+  notLike: String
+
+  """
+  Matches the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.
+  """
+  likeInsensitive: String
+
+  """
+  Does not match the specified pattern (case-insensitive). An underscore (_) matches any single character; a percent sign (%) matches any sequence of zero or more characters.
+  """
+  notLikeInsensitive: String
+
+  """Equal to the specified value (case-insensitive)."""
+  equalToInsensitive: String
+
+  """Not equal to the specified value (case-insensitive)."""
+  notEqualToInsensitive: String
+
+  """
+  Not equal to the specified value, treating null like an ordinary value (case-insensitive).
+  """
+  distinctFromInsensitive: String
+
+  """
+  Equal to the specified value, treating null like an ordinary value (case-insensitive).
+  """
+  notDistinctFromInsensitive: String
+
+  """Included in the specified list (case-insensitive)."""
+  inInsensitive: [String!]
+
+  """Not included in the specified list (case-insensitive)."""
+  notInInsensitive: [String!]
+
+  """Less than the specified value (case-insensitive)."""
+  lessThanInsensitive: String
+
+  """Less than or equal to the specified value (case-insensitive)."""
+  lessThanOrEqualToInsensitive: String
+
+  """Greater than the specified value (case-insensitive)."""
+  greaterThanInsensitive: String
+
+  """Greater than or equal to the specified value (case-insensitive)."""
+  greaterThanOrEqualToInsensitive: String
+}
+
+"""
+A filter to be used against Float fields. All fields are combined with a logical ‘and.’
+"""
+input FloatFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: Float
+
+  """Not equal to the specified value."""
+  notEqualTo: Float
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: Float
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: Float
+
+  """Included in the specified list."""
+  in: [Float!]
+
+  """Not included in the specified list."""
+  notIn: [Float!]
+
+  """Less than the specified value."""
+  lessThan: Float
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: Float
+
+  """Greater than the specified value."""
+  greaterThan: Float
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: Float
+}
+
+"""
+A filter to be used against Datetime fields. All fields are combined with a logical ‘and.’
+"""
+input DatetimeFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: Datetime
+
+  """Not equal to the specified value."""
+  notEqualTo: Datetime
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: Datetime
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: Datetime
+
+  """Included in the specified list."""
+  in: [Datetime!]
+
+  """Not included in the specified list."""
+  notIn: [Datetime!]
+
+  """Less than the specified value."""
+  lessThan: Datetime
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: Datetime
+
+  """Greater than the specified value."""
+  greaterThan: Datetime
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: Datetime
+}
+
+"""
+A filter to be used against `Employee` object types. All fields are combined with a logical ‘and.’
+"""
+input EmployeeFilter {
+  """Filter by the object’s `employeeId` field."""
+  employeeId: BigIntFilter
+
+  """Filter by the object’s `departmentId` field."""
+  departmentId: BigIntFilter
+
+  """Filter by the object’s `employeeName` field."""
+  employeeName: StringFilter
+
+  """Filter by the object’s `employeeEmail` field."""
+  employeeEmail: StringFilter
+
+  """Filter by the object’s `employeeAge` field."""
+  employeeAge: IntFilter
+
+  """Filter by the object’s `employeePost` field."""
+  employeePost: StringFilter
+
+  """Filter by the object’s `employeeBasic` field."""
+  employeeBasic: IntFilter
+
+  """Filter by the object’s `joiningDate` field."""
+  joiningDate: DatetimeFilter
+
+  """Filter by the object’s `status` field."""
+  status: BooleanFilter
+
+  """Filter by the object’s `salesBySalesPersonIdList` relation."""
+  salesBySalesPersonIdList: EmployeeToManySaleFilter
+
+  """Some related `salesBySalesPersonIdList` exist."""
+  salesBySalesPersonIdListExist: Boolean
+
+  """Filter by the object’s `department` relation."""
+  department: DepartmentFilter
+
+  """Checks for all expressions in this list."""
+  and: [EmployeeFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [EmployeeFilter!]
+
+  """Negates the expression."""
+  not: EmployeeFilter
+}
+
+"""
+A filter to be used against Int fields. All fields are combined with a logical ‘and.’
+"""
+input IntFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: Int
+
+  """Not equal to the specified value."""
+  notEqualTo: Int
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: Int
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: Int
+
+  """Included in the specified list."""
+  in: [Int!]
+
+  """Not included in the specified list."""
+  notIn: [Int!]
+
+  """Less than the specified value."""
+  lessThan: Int
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: Int
+
+  """Greater than the specified value."""
+  greaterThan: Int
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: Int
+}
+
+"""
+A filter to be used against Boolean fields. All fields are combined with a logical ‘and.’
+"""
+input BooleanFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: Boolean
+
+  """Not equal to the specified value."""
+  notEqualTo: Boolean
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: Boolean
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: Boolean
+
+  """Included in the specified list."""
+  in: [Boolean!]
+
+  """Not included in the specified list."""
+  notIn: [Boolean!]
+
+  """Less than the specified value."""
+  lessThan: Boolean
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: Boolean
+
+  """Greater than the specified value."""
+  greaterThan: Boolean
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: Boolean
+}
+
+"""
+A filter to be used against many `Sale` object types. All fields are combined with a logical ‘and.’
+"""
+input EmployeeToManySaleFilter {
+  """
+  Every related `Sale` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: SaleFilter
+
+  """
+  Some related `Sale` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: SaleFilter
+
+  """
+  No related `Sale` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: SaleFilter
+
+  """Aggregates across related `Sale` match the filter criteria."""
+  aggregates: SaleAggregatesFilter
+}
+
+"""A filter to be used against aggregates of `Sale` object types."""
+input SaleAggregatesFilter {
+  """
+  A filter that must pass for the relevant `Sale` object to be included within the aggregate.
+  """
+  filter: SaleFilter
+
+  """Sum aggregate over matching `Sale` objects."""
+  sum: SaleSumAggregateFilter
+
+  """Distinct count aggregate over matching `Sale` objects."""
+  distinctCount: SaleDistinctCountAggregateFilter
+
+  """Minimum aggregate over matching `Sale` objects."""
+  min: SaleMinAggregateFilter
+
+  """Maximum aggregate over matching `Sale` objects."""
+  max: SaleMaxAggregateFilter
+
+  """Mean average aggregate over matching `Sale` objects."""
+  average: SaleAverageAggregateFilter
+
+  """Sample standard deviation aggregate over matching `Sale` objects."""
+  stddevSample: SaleStddevSampleAggregateFilter
+
+  """Population standard deviation aggregate over matching `Sale` objects."""
+  stddevPopulation: SaleStddevPopulationAggregateFilter
+
+  """Sample variance aggregate over matching `Sale` objects."""
+  varianceSample: SaleVarianceSampleAggregateFilter
+
+  """Population variance aggregate over matching `Sale` objects."""
+  variancePopulation: SaleVariancePopulationAggregateFilter
+}
+
+input SaleSumAggregateFilter {
+  salesId: BigFloatFilter
+  price: FloatFilter
+  salesPersonId: BigFloatFilter
+}
+
+"""
+A filter to be used against BigFloat fields. All fields are combined with a logical ‘and.’
+"""
+input BigFloatFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: BigFloat
+
+  """Not equal to the specified value."""
+  notEqualTo: BigFloat
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: BigFloat
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: BigFloat
+
+  """Included in the specified list."""
+  in: [BigFloat!]
+
+  """Not included in the specified list."""
+  notIn: [BigFloat!]
+
+  """Less than the specified value."""
+  lessThan: BigFloat
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: BigFloat
+
+  """Greater than the specified value."""
+  greaterThan: BigFloat
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: BigFloat
+}
+
+input SaleDistinctCountAggregateFilter {
+  salesId: BigIntFilter
+  productName: BigIntFilter
+  price: BigIntFilter
+  customerName: BigIntFilter
+  salesPersonId: BigIntFilter
+  saleDate: BigIntFilter
+}
+
+input SaleMinAggregateFilter {
+  salesId: BigIntFilter
+  price: FloatFilter
+  salesPersonId: BigIntFilter
+}
+
+input SaleMaxAggregateFilter {
+  salesId: BigIntFilter
+  price: FloatFilter
+  salesPersonId: BigIntFilter
+}
+
+input SaleAverageAggregateFilter {
+  salesId: BigFloatFilter
+  price: FloatFilter
+  salesPersonId: BigFloatFilter
+}
+
+input SaleStddevSampleAggregateFilter {
+  salesId: BigFloatFilter
+  price: FloatFilter
+  salesPersonId: BigFloatFilter
+}
+
+input SaleStddevPopulationAggregateFilter {
+  salesId: BigFloatFilter
+  price: FloatFilter
+  salesPersonId: BigFloatFilter
+}
+
+input SaleVarianceSampleAggregateFilter {
+  salesId: BigFloatFilter
+  price: FloatFilter
+  salesPersonId: BigFloatFilter
+}
+
+input SaleVariancePopulationAggregateFilter {
+  salesId: BigFloatFilter
+  price: FloatFilter
+  salesPersonId: BigFloatFilter
+}
+
+"""
+A filter to be used against `Department` object types. All fields are combined with a logical ‘and.’
+"""
+input DepartmentFilter {
+  """Filter by the object’s `departmentId` field."""
+  departmentId: BigIntFilter
+
+  """Filter by the object’s `companyId` field."""
+  companyId: BigIntFilter
+
+  """Filter by the object’s `departmentName` field."""
+  departmentName: StringFilter
+
+  """Filter by the object’s `employeesList` relation."""
+  employeesList: DepartmentToManyEmployeeFilter
+
+  """Some related `employeesList` exist."""
+  employeesListExist: Boolean
+
+  """Filter by the object’s `company` relation."""
+  company: CompanyFilter
+
+  """Checks for all expressions in this list."""
+  and: [DepartmentFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [DepartmentFilter!]
+
+  """Negates the expression."""
+  not: DepartmentFilter
+}
+
+"""
+A filter to be used against many `Employee` object types. All fields are combined with a logical ‘and.’
+"""
+input DepartmentToManyEmployeeFilter {
+  """
+  Every related `Employee` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: EmployeeFilter
+
+  """
+  Some related `Employee` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: EmployeeFilter
+
+  """
+  No related `Employee` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: EmployeeFilter
+
+  """Aggregates across related `Employee` match the filter criteria."""
+  aggregates: EmployeeAggregatesFilter
+}
+
+"""A filter to be used against aggregates of `Employee` object types."""
+input EmployeeAggregatesFilter {
+  """
+  A filter that must pass for the relevant `Employee` object to be included within the aggregate.
+  """
+  filter: EmployeeFilter
+
+  """Sum aggregate over matching `Employee` objects."""
+  sum: EmployeeSumAggregateFilter
+
+  """Distinct count aggregate over matching `Employee` objects."""
+  distinctCount: EmployeeDistinctCountAggregateFilter
+
+  """Minimum aggregate over matching `Employee` objects."""
+  min: EmployeeMinAggregateFilter
+
+  """Maximum aggregate over matching `Employee` objects."""
+  max: EmployeeMaxAggregateFilter
+
+  """Mean average aggregate over matching `Employee` objects."""
+  average: EmployeeAverageAggregateFilter
+
+  """Sample standard deviation aggregate over matching `Employee` objects."""
+  stddevSample: EmployeeStddevSampleAggregateFilter
+
+  """
+  Population standard deviation aggregate over matching `Employee` objects.
+  """
+  stddevPopulation: EmployeeStddevPopulationAggregateFilter
+
+  """Sample variance aggregate over matching `Employee` objects."""
+  varianceSample: EmployeeVarianceSampleAggregateFilter
+
+  """Population variance aggregate over matching `Employee` objects."""
+  variancePopulation: EmployeeVariancePopulationAggregateFilter
+}
+
+input EmployeeSumAggregateFilter {
+  employeeId: BigFloatFilter
+  departmentId: BigFloatFilter
+  employeeAge: BigIntFilter
+  employeeBasic: BigIntFilter
+}
+
+input EmployeeDistinctCountAggregateFilter {
+  employeeId: BigIntFilter
+  departmentId: BigIntFilter
+  employeeName: BigIntFilter
+  employeeEmail: BigIntFilter
+  employeeAge: BigIntFilter
+  employeePost: BigIntFilter
+  employeeBasic: BigIntFilter
+  joiningDate: BigIntFilter
+  status: BigIntFilter
+}
+
+input EmployeeMinAggregateFilter {
+  employeeId: BigIntFilter
+  departmentId: BigIntFilter
+  employeeAge: IntFilter
+  employeeBasic: IntFilter
+}
+
+input EmployeeMaxAggregateFilter {
+  employeeId: BigIntFilter
+  departmentId: BigIntFilter
+  employeeAge: IntFilter
+  employeeBasic: IntFilter
+}
+
+input EmployeeAverageAggregateFilter {
+  employeeId: BigFloatFilter
+  departmentId: BigFloatFilter
+  employeeAge: BigFloatFilter
+  employeeBasic: BigFloatFilter
+}
+
+input EmployeeStddevSampleAggregateFilter {
+  employeeId: BigFloatFilter
+  departmentId: BigFloatFilter
+  employeeAge: BigFloatFilter
+  employeeBasic: BigFloatFilter
+}
+
+input EmployeeStddevPopulationAggregateFilter {
+  employeeId: BigFloatFilter
+  departmentId: BigFloatFilter
+  employeeAge: BigFloatFilter
+  employeeBasic: BigFloatFilter
+}
+
+input EmployeeVarianceSampleAggregateFilter {
+  employeeId: BigFloatFilter
+  departmentId: BigFloatFilter
+  employeeAge: BigFloatFilter
+  employeeBasic: BigFloatFilter
+}
+
+input EmployeeVariancePopulationAggregateFilter {
+  employeeId: BigFloatFilter
+  departmentId: BigFloatFilter
+  employeeAge: BigFloatFilter
+  employeeBasic: BigFloatFilter
+}
+
+"""
+A filter to be used against `Company` object types. All fields are combined with a logical ‘and.’
+"""
+input CompanyFilter {
+  """Filter by the object’s `companyId` field."""
+  companyId: BigIntFilter
+
+  """Filter by the object’s `companyName` field."""
+  companyName: StringFilter
+
+  """Filter by the object’s `departmentsList` relation."""
+  departmentsList: CompanyToManyDepartmentFilter
+
+  """Some related `departmentsList` exist."""
+  departmentsListExist: Boolean
+
+  """Checks for all expressions in this list."""
+  and: [CompanyFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [CompanyFilter!]
+
+  """Negates the expression."""
+  not: CompanyFilter
+}
+
+"""
+A filter to be used against many `Department` object types. All fields are combined with a logical ‘and.’
+"""
+input CompanyToManyDepartmentFilter {
+  """
+  Every related `Department` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  every: DepartmentFilter
+
+  """
+  Some related `Department` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  some: DepartmentFilter
+
+  """
+  No related `Department` matches the filter criteria. All fields are combined with a logical ‘and.’
+  """
+  none: DepartmentFilter
+
+  """Aggregates across related `Department` match the filter criteria."""
+  aggregates: DepartmentAggregatesFilter
+}
+
+"""A filter to be used against aggregates of `Department` object types."""
+input DepartmentAggregatesFilter {
+  """
+  A filter that must pass for the relevant `Department` object to be included within the aggregate.
+  """
+  filter: DepartmentFilter
+
+  """Sum aggregate over matching `Department` objects."""
+  sum: DepartmentSumAggregateFilter
+
+  """Distinct count aggregate over matching `Department` objects."""
+  distinctCount: DepartmentDistinctCountAggregateFilter
+
+  """Minimum aggregate over matching `Department` objects."""
+  min: DepartmentMinAggregateFilter
+
+  """Maximum aggregate over matching `Department` objects."""
+  max: DepartmentMaxAggregateFilter
+
+  """Mean average aggregate over matching `Department` objects."""
+  average: DepartmentAverageAggregateFilter
+
+  """
+  Sample standard deviation aggregate over matching `Department` objects.
+  """
+  stddevSample: DepartmentStddevSampleAggregateFilter
+
+  """
+  Population standard deviation aggregate over matching `Department` objects.
+  """
+  stddevPopulation: DepartmentStddevPopulationAggregateFilter
+
+  """Sample variance aggregate over matching `Department` objects."""
+  varianceSample: DepartmentVarianceSampleAggregateFilter
+
+  """Population variance aggregate over matching `Department` objects."""
+  variancePopulation: DepartmentVariancePopulationAggregateFilter
+}
+
+input DepartmentSumAggregateFilter {
+  departmentId: BigFloatFilter
+  companyId: BigFloatFilter
+}
+
+input DepartmentDistinctCountAggregateFilter {
+  departmentId: BigIntFilter
+  companyId: BigIntFilter
+  departmentName: BigIntFilter
+}
+
+input DepartmentMinAggregateFilter {
+  departmentId: BigIntFilter
+  companyId: BigIntFilter
+}
+
+input DepartmentMaxAggregateFilter {
+  departmentId: BigIntFilter
+  companyId: BigIntFilter
+}
+
+input DepartmentAverageAggregateFilter {
+  departmentId: BigFloatFilter
+  companyId: BigFloatFilter
+}
+
+input DepartmentStddevSampleAggregateFilter {
+  departmentId: BigFloatFilter
+  companyId: BigFloatFilter
+}
+
+input DepartmentStddevPopulationAggregateFilter {
+  departmentId: BigFloatFilter
+  companyId: BigFloatFilter
+}
+
+input DepartmentVarianceSampleAggregateFilter {
+  departmentId: BigFloatFilter
+  companyId: BigFloatFilter
+}
+
+input DepartmentVariancePopulationAggregateFilter {
+  departmentId: BigFloatFilter
+  companyId: BigFloatFilter
+}
+
+"""A `Employee` edge in the connection."""
+type EmployeesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Employee` at the end of the edge."""
+  node: Employee!
+}
+
+type EmployeeAggregates {
+  keys: [String!]
+
+  """
+  Sum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  sum: EmployeeSumAggregates
+
+  """
+  Distinct count aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  distinctCount: EmployeeDistinctCountAggregates
+
+  """
+  Minimum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  min: EmployeeMinAggregates
+
+  """
+  Maximum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  max: EmployeeMaxAggregates
+
+  """
+  Mean average aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  average: EmployeeAverageAggregates
+
+  """
+  Sample standard deviation aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  stddevSample: EmployeeStddevSampleAggregates
+
+  """
+  Population standard deviation aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  stddevPopulation: EmployeeStddevPopulationAggregates
+
+  """
+  Sample variance aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  varianceSample: EmployeeVarianceSampleAggregates
+
+  """
+  Population variance aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  variancePopulation: EmployeeVariancePopulationAggregates
+}
+
+type EmployeeSumAggregates {
+  """Sum of employeeId across the matching connection"""
+  employeeId: BigFloat!
+
+  """Sum of departmentId across the matching connection"""
+  departmentId: BigFloat!
+
+  """Sum of employeeAge across the matching connection"""
+  employeeAge: BigInt!
+
+  """Sum of employeeBasic across the matching connection"""
+  employeeBasic: BigInt!
+}
+
+type EmployeeDistinctCountAggregates {
+  """Distinct count of employeeId across the matching connection"""
+  employeeId: BigInt
+
+  """Distinct count of departmentId across the matching connection"""
+  departmentId: BigInt
+
+  """Distinct count of employeeName across the matching connection"""
+  employeeName: BigInt
+
+  """Distinct count of employeeEmail across the matching connection"""
+  employeeEmail: BigInt
+
+  """Distinct count of employeeAge across the matching connection"""
+  employeeAge: BigInt
+
+  """Distinct count of employeePost across the matching connection"""
+  employeePost: BigInt
+
+  """Distinct count of employeeBasic across the matching connection"""
+  employeeBasic: BigInt
+
+  """Distinct count of joiningDate across the matching connection"""
+  joiningDate: BigInt
+
+  """Distinct count of status across the matching connection"""
+  status: BigInt
+}
+
+type EmployeeMinAggregates {
+  """Minimum of employeeId across the matching connection"""
+  employeeId: BigInt
+
+  """Minimum of departmentId across the matching connection"""
+  departmentId: BigInt
+
+  """Minimum of employeeAge across the matching connection"""
+  employeeAge: Int
+
+  """Minimum of employeeBasic across the matching connection"""
+  employeeBasic: Int
+}
+
+type EmployeeMaxAggregates {
+  """Maximum of employeeId across the matching connection"""
+  employeeId: BigInt
+
+  """Maximum of departmentId across the matching connection"""
+  departmentId: BigInt
+
+  """Maximum of employeeAge across the matching connection"""
+  employeeAge: Int
+
+  """Maximum of employeeBasic across the matching connection"""
+  employeeBasic: Int
+}
+
+type EmployeeAverageAggregates {
+  """Mean average of employeeId across the matching connection"""
+  employeeId: BigFloat
+
+  """Mean average of departmentId across the matching connection"""
+  departmentId: BigFloat
+
+  """Mean average of employeeAge across the matching connection"""
+  employeeAge: BigFloat
+
+  """Mean average of employeeBasic across the matching connection"""
+  employeeBasic: BigFloat
+}
+
+type EmployeeStddevSampleAggregates {
+  """Sample standard deviation of employeeId across the matching connection"""
+  employeeId: BigFloat
+
+  """
+  Sample standard deviation of departmentId across the matching connection
+  """
+  departmentId: BigFloat
+
+  """
+  Sample standard deviation of employeeAge across the matching connection
+  """
+  employeeAge: BigFloat
+
+  """
+  Sample standard deviation of employeeBasic across the matching connection
+  """
+  employeeBasic: BigFloat
+}
+
+type EmployeeStddevPopulationAggregates {
+  """
+  Population standard deviation of employeeId across the matching connection
+  """
+  employeeId: BigFloat
+
+  """
+  Population standard deviation of departmentId across the matching connection
+  """
+  departmentId: BigFloat
+
+  """
+  Population standard deviation of employeeAge across the matching connection
+  """
+  employeeAge: BigFloat
+
+  """
+  Population standard deviation of employeeBasic across the matching connection
+  """
+  employeeBasic: BigFloat
+}
+
+type EmployeeVarianceSampleAggregates {
+  """Sample variance of employeeId across the matching connection"""
+  employeeId: BigFloat
+
+  """Sample variance of departmentId across the matching connection"""
+  departmentId: BigFloat
+
+  """Sample variance of employeeAge across the matching connection"""
+  employeeAge: BigFloat
+
+  """Sample variance of employeeBasic across the matching connection"""
+  employeeBasic: BigFloat
+}
+
+type EmployeeVariancePopulationAggregates {
+  """Population variance of employeeId across the matching connection"""
+  employeeId: BigFloat
+
+  """Population variance of departmentId across the matching connection"""
+  departmentId: BigFloat
+
+  """Population variance of employeeAge across the matching connection"""
+  employeeAge: BigFloat
+
+  """Population variance of employeeBasic across the matching connection"""
+  employeeBasic: BigFloat
+}
+
+"""Grouping methods for `Employee` for usage during aggregation."""
+enum EmployeeGroupBy {
+  DEPARTMENT_ID
+  EMPLOYEE_NAME
+  EMPLOYEE_EMAIL
+  EMPLOYEE_AGE
+  EMPLOYEE_POST
+  EMPLOYEE_BASIC
+  JOINING_DATE
+  JOINING_DATE_TRUNCATED_TO_YEAR
+  JOINING_DATE_TRUNCATED_TO_QUARTER
+  JOINING_DATE_TRUNCATED_TO_MONTH
+  JOINING_DATE_TRUNCATED_TO_WEEK
+  JOINING_DATE_TRUNCATED_TO_DAY
+  JOINING_DATE_TRUNCATED_TO_HOUR
+  STATUS
+}
+
+"""Conditions for `Employee` aggregates."""
+input EmployeeHavingInput {
+  AND: [EmployeeHavingInput!]
+  OR: [EmployeeHavingInput!]
+  sum: EmployeeHavingSumInput
+  distinctCount: EmployeeHavingDistinctCountInput
+  min: EmployeeHavingMinInput
+  max: EmployeeHavingMaxInput
+  average: EmployeeHavingAverageInput
+  stddevSample: EmployeeHavingStddevSampleInput
+  stddevPopulation: EmployeeHavingStddevPopulationInput
+  varianceSample: EmployeeHavingVarianceSampleInput
+  variancePopulation: EmployeeHavingVariancePopulationInput
+}
+
+input EmployeeHavingSumInput {
+  employeeId: HavingBigintFilter
+  departmentId: HavingBigintFilter
+  employeeAge: HavingIntFilter
+  employeeBasic: HavingIntFilter
+  joiningDate: HavingDatetimeFilter
+}
+
+input HavingIntFilter {
+  equalTo: Int
+  notEqualTo: Int
+  greaterThan: Int
+  greaterThanOrEqualTo: Int
+  lessThan: Int
+  lessThanOrEqualTo: Int
+}
+
+input EmployeeHavingDistinctCountInput {
+  employeeId: HavingBigintFilter
+  departmentId: HavingBigintFilter
+  employeeAge: HavingIntFilter
+  employeeBasic: HavingIntFilter
+  joiningDate: HavingDatetimeFilter
+}
+
+input EmployeeHavingMinInput {
+  employeeId: HavingBigintFilter
+  departmentId: HavingBigintFilter
+  employeeAge: HavingIntFilter
+  employeeBasic: HavingIntFilter
+  joiningDate: HavingDatetimeFilter
+}
+
+input EmployeeHavingMaxInput {
+  employeeId: HavingBigintFilter
+  departmentId: HavingBigintFilter
+  employeeAge: HavingIntFilter
+  employeeBasic: HavingIntFilter
+  joiningDate: HavingDatetimeFilter
+}
+
+input EmployeeHavingAverageInput {
+  employeeId: HavingBigintFilter
+  departmentId: HavingBigintFilter
+  employeeAge: HavingIntFilter
+  employeeBasic: HavingIntFilter
+  joiningDate: HavingDatetimeFilter
+}
+
+input EmployeeHavingStddevSampleInput {
+  employeeId: HavingBigintFilter
+  departmentId: HavingBigintFilter
+  employeeAge: HavingIntFilter
+  employeeBasic: HavingIntFilter
+  joiningDate: HavingDatetimeFilter
+}
+
+input EmployeeHavingStddevPopulationInput {
+  employeeId: HavingBigintFilter
+  departmentId: HavingBigintFilter
+  employeeAge: HavingIntFilter
+  employeeBasic: HavingIntFilter
+  joiningDate: HavingDatetimeFilter
+}
+
+input EmployeeHavingVarianceSampleInput {
+  employeeId: HavingBigintFilter
+  departmentId: HavingBigintFilter
+  employeeAge: HavingIntFilter
+  employeeBasic: HavingIntFilter
+  joiningDate: HavingDatetimeFilter
+}
+
+input EmployeeHavingVariancePopulationInput {
+  employeeId: HavingBigintFilter
+  departmentId: HavingBigintFilter
+  employeeAge: HavingIntFilter
+  employeeBasic: HavingIntFilter
+  joiningDate: HavingDatetimeFilter
+}
+
+"""Methods to use when ordering `Employee`."""
+enum EmployeesOrderBy {
+  NATURAL
+  EMPLOYEE_ID_ASC
+  EMPLOYEE_ID_DESC
+  DEPARTMENT_ID_ASC
+  DEPARTMENT_ID_DESC
+  EMPLOYEE_NAME_ASC
+  EMPLOYEE_NAME_DESC
+  EMPLOYEE_EMAIL_ASC
+  EMPLOYEE_EMAIL_DESC
+  EMPLOYEE_AGE_ASC
+  EMPLOYEE_AGE_DESC
+  EMPLOYEE_POST_ASC
+  EMPLOYEE_POST_DESC
+  EMPLOYEE_BASIC_ASC
+  EMPLOYEE_BASIC_DESC
+  JOINING_DATE_ASC
+  JOINING_DATE_DESC
+  STATUS_ASC
+  STATUS_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  SALES_BY_SALES_PERSON_ID_COUNT_ASC
+  SALES_BY_SALES_PERSON_ID_COUNT_DESC
+  SALES_BY_SALES_PERSON_ID_SUM_SALES_ID_ASC
+  SALES_BY_SALES_PERSON_ID_SUM_SALES_ID_DESC
+  SALES_BY_SALES_PERSON_ID_SUM_PRODUCT_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_SUM_PRODUCT_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_SUM_PRICE_ASC
+  SALES_BY_SALES_PERSON_ID_SUM_PRICE_DESC
+  SALES_BY_SALES_PERSON_ID_SUM_CUSTOMER_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_SUM_CUSTOMER_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_SUM_SALES_PERSON_ID_ASC
+  SALES_BY_SALES_PERSON_ID_SUM_SALES_PERSON_ID_DESC
+  SALES_BY_SALES_PERSON_ID_SUM_SALE_DATE_ASC
+  SALES_BY_SALES_PERSON_ID_SUM_SALE_DATE_DESC
+  SALES_BY_SALES_PERSON_ID_DISTINCT_COUNT_SALES_ID_ASC
+  SALES_BY_SALES_PERSON_ID_DISTINCT_COUNT_SALES_ID_DESC
+  SALES_BY_SALES_PERSON_ID_DISTINCT_COUNT_PRODUCT_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_DISTINCT_COUNT_PRODUCT_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_DISTINCT_COUNT_PRICE_ASC
+  SALES_BY_SALES_PERSON_ID_DISTINCT_COUNT_PRICE_DESC
+  SALES_BY_SALES_PERSON_ID_DISTINCT_COUNT_CUSTOMER_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_DISTINCT_COUNT_CUSTOMER_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_DISTINCT_COUNT_SALES_PERSON_ID_ASC
+  SALES_BY_SALES_PERSON_ID_DISTINCT_COUNT_SALES_PERSON_ID_DESC
+  SALES_BY_SALES_PERSON_ID_DISTINCT_COUNT_SALE_DATE_ASC
+  SALES_BY_SALES_PERSON_ID_DISTINCT_COUNT_SALE_DATE_DESC
+  SALES_BY_SALES_PERSON_ID_MIN_SALES_ID_ASC
+  SALES_BY_SALES_PERSON_ID_MIN_SALES_ID_DESC
+  SALES_BY_SALES_PERSON_ID_MIN_PRODUCT_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_MIN_PRODUCT_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_MIN_PRICE_ASC
+  SALES_BY_SALES_PERSON_ID_MIN_PRICE_DESC
+  SALES_BY_SALES_PERSON_ID_MIN_CUSTOMER_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_MIN_CUSTOMER_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_MIN_SALES_PERSON_ID_ASC
+  SALES_BY_SALES_PERSON_ID_MIN_SALES_PERSON_ID_DESC
+  SALES_BY_SALES_PERSON_ID_MIN_SALE_DATE_ASC
+  SALES_BY_SALES_PERSON_ID_MIN_SALE_DATE_DESC
+  SALES_BY_SALES_PERSON_ID_MAX_SALES_ID_ASC
+  SALES_BY_SALES_PERSON_ID_MAX_SALES_ID_DESC
+  SALES_BY_SALES_PERSON_ID_MAX_PRODUCT_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_MAX_PRODUCT_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_MAX_PRICE_ASC
+  SALES_BY_SALES_PERSON_ID_MAX_PRICE_DESC
+  SALES_BY_SALES_PERSON_ID_MAX_CUSTOMER_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_MAX_CUSTOMER_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_MAX_SALES_PERSON_ID_ASC
+  SALES_BY_SALES_PERSON_ID_MAX_SALES_PERSON_ID_DESC
+  SALES_BY_SALES_PERSON_ID_MAX_SALE_DATE_ASC
+  SALES_BY_SALES_PERSON_ID_MAX_SALE_DATE_DESC
+  SALES_BY_SALES_PERSON_ID_AVERAGE_SALES_ID_ASC
+  SALES_BY_SALES_PERSON_ID_AVERAGE_SALES_ID_DESC
+  SALES_BY_SALES_PERSON_ID_AVERAGE_PRODUCT_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_AVERAGE_PRODUCT_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_AVERAGE_PRICE_ASC
+  SALES_BY_SALES_PERSON_ID_AVERAGE_PRICE_DESC
+  SALES_BY_SALES_PERSON_ID_AVERAGE_CUSTOMER_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_AVERAGE_CUSTOMER_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_AVERAGE_SALES_PERSON_ID_ASC
+  SALES_BY_SALES_PERSON_ID_AVERAGE_SALES_PERSON_ID_DESC
+  SALES_BY_SALES_PERSON_ID_AVERAGE_SALE_DATE_ASC
+  SALES_BY_SALES_PERSON_ID_AVERAGE_SALE_DATE_DESC
+  SALES_BY_SALES_PERSON_ID_STDDEV_SAMPLE_SALES_ID_ASC
+  SALES_BY_SALES_PERSON_ID_STDDEV_SAMPLE_SALES_ID_DESC
+  SALES_BY_SALES_PERSON_ID_STDDEV_SAMPLE_PRODUCT_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_STDDEV_SAMPLE_PRODUCT_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_STDDEV_SAMPLE_PRICE_ASC
+  SALES_BY_SALES_PERSON_ID_STDDEV_SAMPLE_PRICE_DESC
+  SALES_BY_SALES_PERSON_ID_STDDEV_SAMPLE_CUSTOMER_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_STDDEV_SAMPLE_CUSTOMER_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_STDDEV_SAMPLE_SALES_PERSON_ID_ASC
+  SALES_BY_SALES_PERSON_ID_STDDEV_SAMPLE_SALES_PERSON_ID_DESC
+  SALES_BY_SALES_PERSON_ID_STDDEV_SAMPLE_SALE_DATE_ASC
+  SALES_BY_SALES_PERSON_ID_STDDEV_SAMPLE_SALE_DATE_DESC
+  SALES_BY_SALES_PERSON_ID_STDDEV_POPULATION_SALES_ID_ASC
+  SALES_BY_SALES_PERSON_ID_STDDEV_POPULATION_SALES_ID_DESC
+  SALES_BY_SALES_PERSON_ID_STDDEV_POPULATION_PRODUCT_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_STDDEV_POPULATION_PRODUCT_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_STDDEV_POPULATION_PRICE_ASC
+  SALES_BY_SALES_PERSON_ID_STDDEV_POPULATION_PRICE_DESC
+  SALES_BY_SALES_PERSON_ID_STDDEV_POPULATION_CUSTOMER_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_STDDEV_POPULATION_CUSTOMER_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_STDDEV_POPULATION_SALES_PERSON_ID_ASC
+  SALES_BY_SALES_PERSON_ID_STDDEV_POPULATION_SALES_PERSON_ID_DESC
+  SALES_BY_SALES_PERSON_ID_STDDEV_POPULATION_SALE_DATE_ASC
+  SALES_BY_SALES_PERSON_ID_STDDEV_POPULATION_SALE_DATE_DESC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_SAMPLE_SALES_ID_ASC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_SAMPLE_SALES_ID_DESC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_SAMPLE_PRODUCT_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_SAMPLE_PRODUCT_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_SAMPLE_PRICE_ASC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_SAMPLE_PRICE_DESC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_SAMPLE_CUSTOMER_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_SAMPLE_CUSTOMER_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_SAMPLE_SALES_PERSON_ID_ASC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_SAMPLE_SALES_PERSON_ID_DESC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_SAMPLE_SALE_DATE_ASC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_SAMPLE_SALE_DATE_DESC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_SALES_ID_ASC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_SALES_ID_DESC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_PRODUCT_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_PRODUCT_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_PRICE_ASC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_PRICE_DESC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_CUSTOMER_NAME_ASC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_CUSTOMER_NAME_DESC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_SALES_PERSON_ID_ASC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_SALES_PERSON_ID_DESC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_SALE_DATE_ASC
+  SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_SALE_DATE_DESC
+}
+
+"""
+A condition to be used against `Employee` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input EmployeeCondition {
+  """Checks for equality with the object’s `employeeId` field."""
+  employeeId: BigInt
+
+  """Checks for equality with the object’s `departmentId` field."""
+  departmentId: BigInt
+
+  """Checks for equality with the object’s `employeeName` field."""
+  employeeName: String
+
+  """Checks for equality with the object’s `employeeEmail` field."""
+  employeeEmail: String
+
+  """Checks for equality with the object’s `employeeAge` field."""
+  employeeAge: Int
+
+  """Checks for equality with the object’s `employeePost` field."""
+  employeePost: String
+
+  """Checks for equality with the object’s `employeeBasic` field."""
+  employeeBasic: Int
+
+  """Checks for equality with the object’s `joiningDate` field."""
+  joiningDate: Datetime
+
+  """Checks for equality with the object’s `status` field."""
+  status: Boolean
+}
+
+"""A `Department` edge in the connection."""
+type DepartmentsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Department` at the end of the edge."""
+  node: Department!
+}
+
+type DepartmentAggregates {
+  keys: [String!]
+
+  """
+  Sum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  sum: DepartmentSumAggregates
+
+  """
+  Distinct count aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  distinctCount: DepartmentDistinctCountAggregates
+
+  """
+  Minimum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  min: DepartmentMinAggregates
+
+  """
+  Maximum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  max: DepartmentMaxAggregates
+
+  """
+  Mean average aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  average: DepartmentAverageAggregates
+
+  """
+  Sample standard deviation aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  stddevSample: DepartmentStddevSampleAggregates
+
+  """
+  Population standard deviation aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  stddevPopulation: DepartmentStddevPopulationAggregates
+
+  """
+  Sample variance aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  varianceSample: DepartmentVarianceSampleAggregates
+
+  """
+  Population variance aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  variancePopulation: DepartmentVariancePopulationAggregates
+}
+
+type DepartmentSumAggregates {
+  """Sum of departmentId across the matching connection"""
+  departmentId: BigFloat!
+
+  """Sum of companyId across the matching connection"""
+  companyId: BigFloat!
+}
+
+type DepartmentDistinctCountAggregates {
+  """Distinct count of departmentId across the matching connection"""
+  departmentId: BigInt
+
+  """Distinct count of companyId across the matching connection"""
+  companyId: BigInt
+
+  """Distinct count of departmentName across the matching connection"""
+  departmentName: BigInt
+}
+
+type DepartmentMinAggregates {
+  """Minimum of departmentId across the matching connection"""
+  departmentId: BigInt
+
+  """Minimum of companyId across the matching connection"""
+  companyId: BigInt
+}
+
+type DepartmentMaxAggregates {
+  """Maximum of departmentId across the matching connection"""
+  departmentId: BigInt
+
+  """Maximum of companyId across the matching connection"""
+  companyId: BigInt
+}
+
+type DepartmentAverageAggregates {
+  """Mean average of departmentId across the matching connection"""
+  departmentId: BigFloat
+
+  """Mean average of companyId across the matching connection"""
+  companyId: BigFloat
+}
+
+type DepartmentStddevSampleAggregates {
+  """
+  Sample standard deviation of departmentId across the matching connection
+  """
+  departmentId: BigFloat
+
+  """Sample standard deviation of companyId across the matching connection"""
+  companyId: BigFloat
+}
+
+type DepartmentStddevPopulationAggregates {
+  """
+  Population standard deviation of departmentId across the matching connection
+  """
+  departmentId: BigFloat
+
+  """
+  Population standard deviation of companyId across the matching connection
+  """
+  companyId: BigFloat
+}
+
+type DepartmentVarianceSampleAggregates {
+  """Sample variance of departmentId across the matching connection"""
+  departmentId: BigFloat
+
+  """Sample variance of companyId across the matching connection"""
+  companyId: BigFloat
+}
+
+type DepartmentVariancePopulationAggregates {
+  """Population variance of departmentId across the matching connection"""
+  departmentId: BigFloat
+
+  """Population variance of companyId across the matching connection"""
+  companyId: BigFloat
+}
+
+"""Grouping methods for `Department` for usage during aggregation."""
+enum DepartmentGroupBy {
+  COMPANY_ID
+}
+
+"""Conditions for `Department` aggregates."""
+input DepartmentHavingInput {
+  AND: [DepartmentHavingInput!]
+  OR: [DepartmentHavingInput!]
+  sum: DepartmentHavingSumInput
+  distinctCount: DepartmentHavingDistinctCountInput
+  min: DepartmentHavingMinInput
+  max: DepartmentHavingMaxInput
+  average: DepartmentHavingAverageInput
+  stddevSample: DepartmentHavingStddevSampleInput
+  stddevPopulation: DepartmentHavingStddevPopulationInput
+  varianceSample: DepartmentHavingVarianceSampleInput
+  variancePopulation: DepartmentHavingVariancePopulationInput
+}
+
+input DepartmentHavingSumInput {
+  departmentId: HavingBigintFilter
+  companyId: HavingBigintFilter
+}
+
+input DepartmentHavingDistinctCountInput {
+  departmentId: HavingBigintFilter
+  companyId: HavingBigintFilter
+}
+
+input DepartmentHavingMinInput {
+  departmentId: HavingBigintFilter
+  companyId: HavingBigintFilter
+}
+
+input DepartmentHavingMaxInput {
+  departmentId: HavingBigintFilter
+  companyId: HavingBigintFilter
+}
+
+input DepartmentHavingAverageInput {
+  departmentId: HavingBigintFilter
+  companyId: HavingBigintFilter
+}
+
+input DepartmentHavingStddevSampleInput {
+  departmentId: HavingBigintFilter
+  companyId: HavingBigintFilter
+}
+
+input DepartmentHavingStddevPopulationInput {
+  departmentId: HavingBigintFilter
+  companyId: HavingBigintFilter
+}
+
+input DepartmentHavingVarianceSampleInput {
+  departmentId: HavingBigintFilter
+  companyId: HavingBigintFilter
+}
+
+input DepartmentHavingVariancePopulationInput {
+  departmentId: HavingBigintFilter
+  companyId: HavingBigintFilter
+}
+
+"""Methods to use when ordering `Department`."""
+enum DepartmentsOrderBy {
+  NATURAL
+  DEPARTMENT_ID_ASC
+  DEPARTMENT_ID_DESC
+  COMPANY_ID_ASC
+  COMPANY_ID_DESC
+  DEPARTMENT_NAME_ASC
+  DEPARTMENT_NAME_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  EMPLOYEES_COUNT_ASC
+  EMPLOYEES_COUNT_DESC
+  EMPLOYEES_SUM_EMPLOYEE_ID_ASC
+  EMPLOYEES_SUM_EMPLOYEE_ID_DESC
+  EMPLOYEES_SUM_DEPARTMENT_ID_ASC
+  EMPLOYEES_SUM_DEPARTMENT_ID_DESC
+  EMPLOYEES_SUM_EMPLOYEE_NAME_ASC
+  EMPLOYEES_SUM_EMPLOYEE_NAME_DESC
+  EMPLOYEES_SUM_EMPLOYEE_EMAIL_ASC
+  EMPLOYEES_SUM_EMPLOYEE_EMAIL_DESC
+  EMPLOYEES_SUM_EMPLOYEE_AGE_ASC
+  EMPLOYEES_SUM_EMPLOYEE_AGE_DESC
+  EMPLOYEES_SUM_EMPLOYEE_POST_ASC
+  EMPLOYEES_SUM_EMPLOYEE_POST_DESC
+  EMPLOYEES_SUM_EMPLOYEE_BASIC_ASC
+  EMPLOYEES_SUM_EMPLOYEE_BASIC_DESC
+  EMPLOYEES_SUM_JOINING_DATE_ASC
+  EMPLOYEES_SUM_JOINING_DATE_DESC
+  EMPLOYEES_SUM_STATUS_ASC
+  EMPLOYEES_SUM_STATUS_DESC
+  EMPLOYEES_DISTINCT_COUNT_EMPLOYEE_ID_ASC
+  EMPLOYEES_DISTINCT_COUNT_EMPLOYEE_ID_DESC
+  EMPLOYEES_DISTINCT_COUNT_DEPARTMENT_ID_ASC
+  EMPLOYEES_DISTINCT_COUNT_DEPARTMENT_ID_DESC
+  EMPLOYEES_DISTINCT_COUNT_EMPLOYEE_NAME_ASC
+  EMPLOYEES_DISTINCT_COUNT_EMPLOYEE_NAME_DESC
+  EMPLOYEES_DISTINCT_COUNT_EMPLOYEE_EMAIL_ASC
+  EMPLOYEES_DISTINCT_COUNT_EMPLOYEE_EMAIL_DESC
+  EMPLOYEES_DISTINCT_COUNT_EMPLOYEE_AGE_ASC
+  EMPLOYEES_DISTINCT_COUNT_EMPLOYEE_AGE_DESC
+  EMPLOYEES_DISTINCT_COUNT_EMPLOYEE_POST_ASC
+  EMPLOYEES_DISTINCT_COUNT_EMPLOYEE_POST_DESC
+  EMPLOYEES_DISTINCT_COUNT_EMPLOYEE_BASIC_ASC
+  EMPLOYEES_DISTINCT_COUNT_EMPLOYEE_BASIC_DESC
+  EMPLOYEES_DISTINCT_COUNT_JOINING_DATE_ASC
+  EMPLOYEES_DISTINCT_COUNT_JOINING_DATE_DESC
+  EMPLOYEES_DISTINCT_COUNT_STATUS_ASC
+  EMPLOYEES_DISTINCT_COUNT_STATUS_DESC
+  EMPLOYEES_MIN_EMPLOYEE_ID_ASC
+  EMPLOYEES_MIN_EMPLOYEE_ID_DESC
+  EMPLOYEES_MIN_DEPARTMENT_ID_ASC
+  EMPLOYEES_MIN_DEPARTMENT_ID_DESC
+  EMPLOYEES_MIN_EMPLOYEE_NAME_ASC
+  EMPLOYEES_MIN_EMPLOYEE_NAME_DESC
+  EMPLOYEES_MIN_EMPLOYEE_EMAIL_ASC
+  EMPLOYEES_MIN_EMPLOYEE_EMAIL_DESC
+  EMPLOYEES_MIN_EMPLOYEE_AGE_ASC
+  EMPLOYEES_MIN_EMPLOYEE_AGE_DESC
+  EMPLOYEES_MIN_EMPLOYEE_POST_ASC
+  EMPLOYEES_MIN_EMPLOYEE_POST_DESC
+  EMPLOYEES_MIN_EMPLOYEE_BASIC_ASC
+  EMPLOYEES_MIN_EMPLOYEE_BASIC_DESC
+  EMPLOYEES_MIN_JOINING_DATE_ASC
+  EMPLOYEES_MIN_JOINING_DATE_DESC
+  EMPLOYEES_MIN_STATUS_ASC
+  EMPLOYEES_MIN_STATUS_DESC
+  EMPLOYEES_MAX_EMPLOYEE_ID_ASC
+  EMPLOYEES_MAX_EMPLOYEE_ID_DESC
+  EMPLOYEES_MAX_DEPARTMENT_ID_ASC
+  EMPLOYEES_MAX_DEPARTMENT_ID_DESC
+  EMPLOYEES_MAX_EMPLOYEE_NAME_ASC
+  EMPLOYEES_MAX_EMPLOYEE_NAME_DESC
+  EMPLOYEES_MAX_EMPLOYEE_EMAIL_ASC
+  EMPLOYEES_MAX_EMPLOYEE_EMAIL_DESC
+  EMPLOYEES_MAX_EMPLOYEE_AGE_ASC
+  EMPLOYEES_MAX_EMPLOYEE_AGE_DESC
+  EMPLOYEES_MAX_EMPLOYEE_POST_ASC
+  EMPLOYEES_MAX_EMPLOYEE_POST_DESC
+  EMPLOYEES_MAX_EMPLOYEE_BASIC_ASC
+  EMPLOYEES_MAX_EMPLOYEE_BASIC_DESC
+  EMPLOYEES_MAX_JOINING_DATE_ASC
+  EMPLOYEES_MAX_JOINING_DATE_DESC
+  EMPLOYEES_MAX_STATUS_ASC
+  EMPLOYEES_MAX_STATUS_DESC
+  EMPLOYEES_AVERAGE_EMPLOYEE_ID_ASC
+  EMPLOYEES_AVERAGE_EMPLOYEE_ID_DESC
+  EMPLOYEES_AVERAGE_DEPARTMENT_ID_ASC
+  EMPLOYEES_AVERAGE_DEPARTMENT_ID_DESC
+  EMPLOYEES_AVERAGE_EMPLOYEE_NAME_ASC
+  EMPLOYEES_AVERAGE_EMPLOYEE_NAME_DESC
+  EMPLOYEES_AVERAGE_EMPLOYEE_EMAIL_ASC
+  EMPLOYEES_AVERAGE_EMPLOYEE_EMAIL_DESC
+  EMPLOYEES_AVERAGE_EMPLOYEE_AGE_ASC
+  EMPLOYEES_AVERAGE_EMPLOYEE_AGE_DESC
+  EMPLOYEES_AVERAGE_EMPLOYEE_POST_ASC
+  EMPLOYEES_AVERAGE_EMPLOYEE_POST_DESC
+  EMPLOYEES_AVERAGE_EMPLOYEE_BASIC_ASC
+  EMPLOYEES_AVERAGE_EMPLOYEE_BASIC_DESC
+  EMPLOYEES_AVERAGE_JOINING_DATE_ASC
+  EMPLOYEES_AVERAGE_JOINING_DATE_DESC
+  EMPLOYEES_AVERAGE_STATUS_ASC
+  EMPLOYEES_AVERAGE_STATUS_DESC
+  EMPLOYEES_STDDEV_SAMPLE_EMPLOYEE_ID_ASC
+  EMPLOYEES_STDDEV_SAMPLE_EMPLOYEE_ID_DESC
+  EMPLOYEES_STDDEV_SAMPLE_DEPARTMENT_ID_ASC
+  EMPLOYEES_STDDEV_SAMPLE_DEPARTMENT_ID_DESC
+  EMPLOYEES_STDDEV_SAMPLE_EMPLOYEE_NAME_ASC
+  EMPLOYEES_STDDEV_SAMPLE_EMPLOYEE_NAME_DESC
+  EMPLOYEES_STDDEV_SAMPLE_EMPLOYEE_EMAIL_ASC
+  EMPLOYEES_STDDEV_SAMPLE_EMPLOYEE_EMAIL_DESC
+  EMPLOYEES_STDDEV_SAMPLE_EMPLOYEE_AGE_ASC
+  EMPLOYEES_STDDEV_SAMPLE_EMPLOYEE_AGE_DESC
+  EMPLOYEES_STDDEV_SAMPLE_EMPLOYEE_POST_ASC
+  EMPLOYEES_STDDEV_SAMPLE_EMPLOYEE_POST_DESC
+  EMPLOYEES_STDDEV_SAMPLE_EMPLOYEE_BASIC_ASC
+  EMPLOYEES_STDDEV_SAMPLE_EMPLOYEE_BASIC_DESC
+  EMPLOYEES_STDDEV_SAMPLE_JOINING_DATE_ASC
+  EMPLOYEES_STDDEV_SAMPLE_JOINING_DATE_DESC
+  EMPLOYEES_STDDEV_SAMPLE_STATUS_ASC
+  EMPLOYEES_STDDEV_SAMPLE_STATUS_DESC
+  EMPLOYEES_STDDEV_POPULATION_EMPLOYEE_ID_ASC
+  EMPLOYEES_STDDEV_POPULATION_EMPLOYEE_ID_DESC
+  EMPLOYEES_STDDEV_POPULATION_DEPARTMENT_ID_ASC
+  EMPLOYEES_STDDEV_POPULATION_DEPARTMENT_ID_DESC
+  EMPLOYEES_STDDEV_POPULATION_EMPLOYEE_NAME_ASC
+  EMPLOYEES_STDDEV_POPULATION_EMPLOYEE_NAME_DESC
+  EMPLOYEES_STDDEV_POPULATION_EMPLOYEE_EMAIL_ASC
+  EMPLOYEES_STDDEV_POPULATION_EMPLOYEE_EMAIL_DESC
+  EMPLOYEES_STDDEV_POPULATION_EMPLOYEE_AGE_ASC
+  EMPLOYEES_STDDEV_POPULATION_EMPLOYEE_AGE_DESC
+  EMPLOYEES_STDDEV_POPULATION_EMPLOYEE_POST_ASC
+  EMPLOYEES_STDDEV_POPULATION_EMPLOYEE_POST_DESC
+  EMPLOYEES_STDDEV_POPULATION_EMPLOYEE_BASIC_ASC
+  EMPLOYEES_STDDEV_POPULATION_EMPLOYEE_BASIC_DESC
+  EMPLOYEES_STDDEV_POPULATION_JOINING_DATE_ASC
+  EMPLOYEES_STDDEV_POPULATION_JOINING_DATE_DESC
+  EMPLOYEES_STDDEV_POPULATION_STATUS_ASC
+  EMPLOYEES_STDDEV_POPULATION_STATUS_DESC
+  EMPLOYEES_VARIANCE_SAMPLE_EMPLOYEE_ID_ASC
+  EMPLOYEES_VARIANCE_SAMPLE_EMPLOYEE_ID_DESC
+  EMPLOYEES_VARIANCE_SAMPLE_DEPARTMENT_ID_ASC
+  EMPLOYEES_VARIANCE_SAMPLE_DEPARTMENT_ID_DESC
+  EMPLOYEES_VARIANCE_SAMPLE_EMPLOYEE_NAME_ASC
+  EMPLOYEES_VARIANCE_SAMPLE_EMPLOYEE_NAME_DESC
+  EMPLOYEES_VARIANCE_SAMPLE_EMPLOYEE_EMAIL_ASC
+  EMPLOYEES_VARIANCE_SAMPLE_EMPLOYEE_EMAIL_DESC
+  EMPLOYEES_VARIANCE_SAMPLE_EMPLOYEE_AGE_ASC
+  EMPLOYEES_VARIANCE_SAMPLE_EMPLOYEE_AGE_DESC
+  EMPLOYEES_VARIANCE_SAMPLE_EMPLOYEE_POST_ASC
+  EMPLOYEES_VARIANCE_SAMPLE_EMPLOYEE_POST_DESC
+  EMPLOYEES_VARIANCE_SAMPLE_EMPLOYEE_BASIC_ASC
+  EMPLOYEES_VARIANCE_SAMPLE_EMPLOYEE_BASIC_DESC
+  EMPLOYEES_VARIANCE_SAMPLE_JOINING_DATE_ASC
+  EMPLOYEES_VARIANCE_SAMPLE_JOINING_DATE_DESC
+  EMPLOYEES_VARIANCE_SAMPLE_STATUS_ASC
+  EMPLOYEES_VARIANCE_SAMPLE_STATUS_DESC
+  EMPLOYEES_VARIANCE_POPULATION_EMPLOYEE_ID_ASC
+  EMPLOYEES_VARIANCE_POPULATION_EMPLOYEE_ID_DESC
+  EMPLOYEES_VARIANCE_POPULATION_DEPARTMENT_ID_ASC
+  EMPLOYEES_VARIANCE_POPULATION_DEPARTMENT_ID_DESC
+  EMPLOYEES_VARIANCE_POPULATION_EMPLOYEE_NAME_ASC
+  EMPLOYEES_VARIANCE_POPULATION_EMPLOYEE_NAME_DESC
+  EMPLOYEES_VARIANCE_POPULATION_EMPLOYEE_EMAIL_ASC
+  EMPLOYEES_VARIANCE_POPULATION_EMPLOYEE_EMAIL_DESC
+  EMPLOYEES_VARIANCE_POPULATION_EMPLOYEE_AGE_ASC
+  EMPLOYEES_VARIANCE_POPULATION_EMPLOYEE_AGE_DESC
+  EMPLOYEES_VARIANCE_POPULATION_EMPLOYEE_POST_ASC
+  EMPLOYEES_VARIANCE_POPULATION_EMPLOYEE_POST_DESC
+  EMPLOYEES_VARIANCE_POPULATION_EMPLOYEE_BASIC_ASC
+  EMPLOYEES_VARIANCE_POPULATION_EMPLOYEE_BASIC_DESC
+  EMPLOYEES_VARIANCE_POPULATION_JOINING_DATE_ASC
+  EMPLOYEES_VARIANCE_POPULATION_JOINING_DATE_DESC
+  EMPLOYEES_VARIANCE_POPULATION_STATUS_ASC
+  EMPLOYEES_VARIANCE_POPULATION_STATUS_DESC
+}
+
+"""
+A condition to be used against `Department` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input DepartmentCondition {
+  """Checks for equality with the object’s `departmentId` field."""
+  departmentId: BigInt
+
+  """Checks for equality with the object’s `companyId` field."""
+  companyId: BigInt
+
+  """Checks for equality with the object’s `departmentName` field."""
+  departmentName: String
+}
+
+"""A `Company` edge in the connection."""
+type CompaniesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Company` at the end of the edge."""
+  node: Company!
+}
+
+type CompanyAggregates {
+  keys: [String!]
+
+  """
+  Sum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  sum: CompanySumAggregates
+
+  """
+  Distinct count aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  distinctCount: CompanyDistinctCountAggregates
+
+  """
+  Minimum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  min: CompanyMinAggregates
+
+  """
+  Maximum aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  max: CompanyMaxAggregates
+
+  """
+  Mean average aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  average: CompanyAverageAggregates
+
+  """
+  Sample standard deviation aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  stddevSample: CompanyStddevSampleAggregates
+
+  """
+  Population standard deviation aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  stddevPopulation: CompanyStddevPopulationAggregates
+
+  """
+  Sample variance aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  varianceSample: CompanyVarianceSampleAggregates
+
+  """
+  Population variance aggregates across the matching connection (ignoring before/after/first/last/offset)
+  """
+  variancePopulation: CompanyVariancePopulationAggregates
+}
+
+type CompanySumAggregates {
+  """Sum of companyId across the matching connection"""
+  companyId: BigFloat!
+}
+
+type CompanyDistinctCountAggregates {
+  """Distinct count of companyId across the matching connection"""
+  companyId: BigInt
+
+  """Distinct count of companyName across the matching connection"""
+  companyName: BigInt
+}
+
+type CompanyMinAggregates {
+  """Minimum of companyId across the matching connection"""
+  companyId: BigInt
+}
+
+type CompanyMaxAggregates {
+  """Maximum of companyId across the matching connection"""
+  companyId: BigInt
+}
+
+type CompanyAverageAggregates {
+  """Mean average of companyId across the matching connection"""
+  companyId: BigFloat
+}
+
+type CompanyStddevSampleAggregates {
+  """Sample standard deviation of companyId across the matching connection"""
+  companyId: BigFloat
+}
+
+type CompanyStddevPopulationAggregates {
+  """
+  Population standard deviation of companyId across the matching connection
+  """
+  companyId: BigFloat
+}
+
+type CompanyVarianceSampleAggregates {
+  """Sample variance of companyId across the matching connection"""
+  companyId: BigFloat
+}
+
+type CompanyVariancePopulationAggregates {
+  """Population variance of companyId across the matching connection"""
+  companyId: BigFloat
+}
+
+"""Methods to use when ordering `Company`."""
+enum CompaniesOrderBy {
+  NATURAL
+  COMPANY_ID_ASC
+  COMPANY_ID_DESC
+  COMPANY_NAME_ASC
+  COMPANY_NAME_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+  DEPARTMENTS_COUNT_ASC
+  DEPARTMENTS_COUNT_DESC
+  DEPARTMENTS_SUM_DEPARTMENT_ID_ASC
+  DEPARTMENTS_SUM_DEPARTMENT_ID_DESC
+  DEPARTMENTS_SUM_COMPANY_ID_ASC
+  DEPARTMENTS_SUM_COMPANY_ID_DESC
+  DEPARTMENTS_SUM_DEPARTMENT_NAME_ASC
+  DEPARTMENTS_SUM_DEPARTMENT_NAME_DESC
+  DEPARTMENTS_DISTINCT_COUNT_DEPARTMENT_ID_ASC
+  DEPARTMENTS_DISTINCT_COUNT_DEPARTMENT_ID_DESC
+  DEPARTMENTS_DISTINCT_COUNT_COMPANY_ID_ASC
+  DEPARTMENTS_DISTINCT_COUNT_COMPANY_ID_DESC
+  DEPARTMENTS_DISTINCT_COUNT_DEPARTMENT_NAME_ASC
+  DEPARTMENTS_DISTINCT_COUNT_DEPARTMENT_NAME_DESC
+  DEPARTMENTS_MIN_DEPARTMENT_ID_ASC
+  DEPARTMENTS_MIN_DEPARTMENT_ID_DESC
+  DEPARTMENTS_MIN_COMPANY_ID_ASC
+  DEPARTMENTS_MIN_COMPANY_ID_DESC
+  DEPARTMENTS_MIN_DEPARTMENT_NAME_ASC
+  DEPARTMENTS_MIN_DEPARTMENT_NAME_DESC
+  DEPARTMENTS_MAX_DEPARTMENT_ID_ASC
+  DEPARTMENTS_MAX_DEPARTMENT_ID_DESC
+  DEPARTMENTS_MAX_COMPANY_ID_ASC
+  DEPARTMENTS_MAX_COMPANY_ID_DESC
+  DEPARTMENTS_MAX_DEPARTMENT_NAME_ASC
+  DEPARTMENTS_MAX_DEPARTMENT_NAME_DESC
+  DEPARTMENTS_AVERAGE_DEPARTMENT_ID_ASC
+  DEPARTMENTS_AVERAGE_DEPARTMENT_ID_DESC
+  DEPARTMENTS_AVERAGE_COMPANY_ID_ASC
+  DEPARTMENTS_AVERAGE_COMPANY_ID_DESC
+  DEPARTMENTS_AVERAGE_DEPARTMENT_NAME_ASC
+  DEPARTMENTS_AVERAGE_DEPARTMENT_NAME_DESC
+  DEPARTMENTS_STDDEV_SAMPLE_DEPARTMENT_ID_ASC
+  DEPARTMENTS_STDDEV_SAMPLE_DEPARTMENT_ID_DESC
+  DEPARTMENTS_STDDEV_SAMPLE_COMPANY_ID_ASC
+  DEPARTMENTS_STDDEV_SAMPLE_COMPANY_ID_DESC
+  DEPARTMENTS_STDDEV_SAMPLE_DEPARTMENT_NAME_ASC
+  DEPARTMENTS_STDDEV_SAMPLE_DEPARTMENT_NAME_DESC
+  DEPARTMENTS_STDDEV_POPULATION_DEPARTMENT_ID_ASC
+  DEPARTMENTS_STDDEV_POPULATION_DEPARTMENT_ID_DESC
+  DEPARTMENTS_STDDEV_POPULATION_COMPANY_ID_ASC
+  DEPARTMENTS_STDDEV_POPULATION_COMPANY_ID_DESC
+  DEPARTMENTS_STDDEV_POPULATION_DEPARTMENT_NAME_ASC
+  DEPARTMENTS_STDDEV_POPULATION_DEPARTMENT_NAME_DESC
+  DEPARTMENTS_VARIANCE_SAMPLE_DEPARTMENT_ID_ASC
+  DEPARTMENTS_VARIANCE_SAMPLE_DEPARTMENT_ID_DESC
+  DEPARTMENTS_VARIANCE_SAMPLE_COMPANY_ID_ASC
+  DEPARTMENTS_VARIANCE_SAMPLE_COMPANY_ID_DESC
+  DEPARTMENTS_VARIANCE_SAMPLE_DEPARTMENT_NAME_ASC
+  DEPARTMENTS_VARIANCE_SAMPLE_DEPARTMENT_NAME_DESC
+  DEPARTMENTS_VARIANCE_POPULATION_DEPARTMENT_ID_ASC
+  DEPARTMENTS_VARIANCE_POPULATION_DEPARTMENT_ID_DESC
+  DEPARTMENTS_VARIANCE_POPULATION_COMPANY_ID_ASC
+  DEPARTMENTS_VARIANCE_POPULATION_COMPANY_ID_DESC
+  DEPARTMENTS_VARIANCE_POPULATION_DEPARTMENT_NAME_ASC
+  DEPARTMENTS_VARIANCE_POPULATION_DEPARTMENT_NAME_DESC
+}
+
+"""
+A condition to be used against `Company` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input CompanyCondition {
+  """Checks for equality with the object’s `companyId` field."""
+  companyId: BigInt
+
+  """Checks for equality with the object’s `companyName` field."""
+  companyName: String
+}
+
+"""A union of all federated types (those that use the @key directive)."""
+union _Entity = Company | Department | Employee | Sale
+
+scalar _Any
+
+"""Describes our federated service."""
+type _Service {
+  """
+  The GraphQL Schema Language definition of our endpoint including the
+  Apollo Federation directives (but not their definitions or the special
+  Apollo Federation fields).
+  """
+  sdl: String @deprecated(reason: "Only Apollo Federation should use this")
+}
+
+"""
+The root mutation type which contains root level fields which mutate data.
+"""
+type Mutation {
+  """Creates a single `Company`."""
+  createCompany(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateCompanyInput!
+  ): CreateCompanyPayload
+
+  """Creates a single `Department`."""
+  createDepartment(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateDepartmentInput!
+  ): CreateDepartmentPayload
+
+  """Creates a single `Employee`."""
+  createEmployee(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateEmployeeInput!
+  ): CreateEmployeePayload
+
+  """Creates a single `Sale`."""
+  createSale(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateSaleInput!
+  ): CreateSalePayload
+
+  """Updates a single `Company` using its globally unique id and a patch."""
+  updateCompanyByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateCompanyByNodeIdInput!
+  ): UpdateCompanyPayload
+
+  """Updates a single `Company` using a unique key and a patch."""
+  updateCompany(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateCompanyInput!
+  ): UpdateCompanyPayload
+
+  """Updates a single `Company` using a unique key and a patch."""
+  updateCompanyByCompanyName(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateCompanyByCompanyNameInput!
+  ): UpdateCompanyPayload
+
+  """
+  Updates a single `Department` using its globally unique id and a patch.
+  """
+  updateDepartmentByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateDepartmentByNodeIdInput!
+  ): UpdateDepartmentPayload
+
+  """Updates a single `Department` using a unique key and a patch."""
+  updateDepartment(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateDepartmentInput!
+  ): UpdateDepartmentPayload
+
+  """Updates a single `Department` using a unique key and a patch."""
+  updateDepartmentByDepartmentName(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateDepartmentByDepartmentNameInput!
+  ): UpdateDepartmentPayload
+
+  """Updates a single `Employee` using its globally unique id and a patch."""
+  updateEmployeeByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateEmployeeByNodeIdInput!
+  ): UpdateEmployeePayload
+
+  """Updates a single `Employee` using a unique key and a patch."""
+  updateEmployee(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateEmployeeInput!
+  ): UpdateEmployeePayload
+
+  """Updates a single `Sale` using its globally unique id and a patch."""
+  updateSaleByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateSaleByNodeIdInput!
+  ): UpdateSalePayload
+
+  """Updates a single `Sale` using a unique key and a patch."""
+  updateSale(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateSaleInput!
+  ): UpdateSalePayload
+
+  """Deletes a single `Company` using its globally unique id."""
+  deleteCompanyByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteCompanyByNodeIdInput!
+  ): DeleteCompanyPayload
+
+  """Deletes a single `Company` using a unique key."""
+  deleteCompany(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteCompanyInput!
+  ): DeleteCompanyPayload
+
+  """Deletes a single `Company` using a unique key."""
+  deleteCompanyByCompanyName(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteCompanyByCompanyNameInput!
+  ): DeleteCompanyPayload
+
+  """Deletes a single `Department` using its globally unique id."""
+  deleteDepartmentByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteDepartmentByNodeIdInput!
+  ): DeleteDepartmentPayload
+
+  """Deletes a single `Department` using a unique key."""
+  deleteDepartment(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteDepartmentInput!
+  ): DeleteDepartmentPayload
+
+  """Deletes a single `Department` using a unique key."""
+  deleteDepartmentByDepartmentName(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteDepartmentByDepartmentNameInput!
+  ): DeleteDepartmentPayload
+
+  """Deletes a single `Employee` using its globally unique id."""
+  deleteEmployeeByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteEmployeeByNodeIdInput!
+  ): DeleteEmployeePayload
+
+  """Deletes a single `Employee` using a unique key."""
+  deleteEmployee(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteEmployeeInput!
+  ): DeleteEmployeePayload
+
+  """Deletes a single `Sale` using its globally unique id."""
+  deleteSaleByNodeId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteSaleByNodeIdInput!
+  ): DeleteSalePayload
+
+  """Deletes a single `Sale` using a unique key."""
+  deleteSale(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteSaleInput!
+  ): DeleteSalePayload
+
+  """Upserts a single `Company`."""
+  upsertCompany(
+    where: UpsertCompanyWhere
+
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertCompanyInput!
+  ): UpsertCompanyPayload
+
+  """Upserts a single `Department`."""
+  upsertDepartment(
+    where: UpsertDepartmentWhere
+
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertDepartmentInput!
+  ): UpsertDepartmentPayload
+
+  """Upserts a single `Employee`."""
+  upsertEmployee(
+    where: UpsertEmployeeWhere
+
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertEmployeeInput!
+  ): UpsertEmployeePayload
+
+  """Upserts a single `Sale`."""
+  upsertSale(
+    where: UpsertSaleWhere
+
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpsertSaleInput!
+  ): UpsertSalePayload
+}
+
+"""The output of our create `Company` mutation."""
+type CreateCompanyPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Company` that was created by this mutation."""
+  company: Company
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Company`. May be used by Relay 1."""
+  companyEdge(
+    """The method to use when ordering `Company`."""
+    orderBy: [CompaniesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CompaniesEdge
+}
+
+"""All input for the create `Company` mutation."""
+input CreateCompanyInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Company` to be created by this mutation."""
+  company: CompanyInput!
+}
+
+"""An input for mutations affecting `Company`"""
+input CompanyInput {
+  companyId: BigInt
+  companyName: String!
+}
+
+"""The output of our create `Department` mutation."""
+type CreateDepartmentPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Department` that was created by this mutation."""
+  department: Department
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Company` that is related to this `Department`."""
+  company: Company
+
+  """An edge for our `Department`. May be used by Relay 1."""
+  departmentEdge(
+    """The method to use when ordering `Department`."""
+    orderBy: [DepartmentsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): DepartmentsEdge
+}
+
+"""All input for the create `Department` mutation."""
+input CreateDepartmentInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Department` to be created by this mutation."""
+  department: DepartmentInput!
+}
+
+"""An input for mutations affecting `Department`"""
+input DepartmentInput {
+  departmentId: BigInt
+  companyId: BigInt!
+  departmentName: String!
+}
+
+"""The output of our create `Employee` mutation."""
+type CreateEmployeePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Employee` that was created by this mutation."""
+  employee: Employee
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Department` that is related to this `Employee`."""
+  department: Department
+
+  """An edge for our `Employee`. May be used by Relay 1."""
+  employeeEdge(
+    """The method to use when ordering `Employee`."""
+    orderBy: [EmployeesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EmployeesEdge
+}
+
+"""All input for the create `Employee` mutation."""
+input CreateEmployeeInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Employee` to be created by this mutation."""
+  employee: EmployeeInput!
+}
+
+"""An input for mutations affecting `Employee`"""
+input EmployeeInput {
+  employeeId: BigInt
+  departmentId: BigInt!
+  employeeName: String!
+  employeeEmail: String!
+  employeeAge: Int!
+  employeePost: String!
+  employeeBasic: Int!
+  joiningDate: Datetime!
+  status: Boolean!
+}
+
+"""The output of our create `Sale` mutation."""
+type CreateSalePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Sale` that was created by this mutation."""
+  sale: Sale
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Employee` that is related to this `Sale`."""
+  salesPerson: Employee
+
+  """An edge for our `Sale`. May be used by Relay 1."""
+  saleEdge(
+    """The method to use when ordering `Sale`."""
+    orderBy: [SalesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SalesEdge
+}
+
+"""All input for the create `Sale` mutation."""
+input CreateSaleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Sale` to be created by this mutation."""
+  sale: SaleInput!
+}
+
+"""An input for mutations affecting `Sale`"""
+input SaleInput {
+  salesId: BigInt
+
+  """
+  {"Validations": {"StringLengthValidation": {"params":{"min":2, "max":50}, "msg":"Length must be between 2 to 50"} }}
+  """
+  productName: String!
+  price: Float!
+  customerName: String!
+  salesPersonId: BigInt!
+  saleDate: Datetime!
+}
+
+"""The output of our update `Company` mutation."""
+type UpdateCompanyPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Company` that was updated by this mutation."""
+  company: Company
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Company`. May be used by Relay 1."""
+  companyEdge(
+    """The method to use when ordering `Company`."""
+    orderBy: [CompaniesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CompaniesEdge
+}
+
+"""All input for the `updateCompanyByNodeId` mutation."""
+input UpdateCompanyByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Company` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Company` being updated.
+  """
+  patch: CompanyPatch!
+}
+
+"""
+Represents an update to a `Company`. Fields that are set will be updated.
+"""
+input CompanyPatch {
+  companyId: BigInt
+  companyName: String
+}
+
+"""All input for the `updateCompany` mutation."""
+input UpdateCompanyInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Company` being updated.
+  """
+  patch: CompanyPatch!
+  companyId: BigInt!
+}
+
+"""All input for the `updateCompanyByCompanyName` mutation."""
+input UpdateCompanyByCompanyNameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Company` being updated.
+  """
+  patch: CompanyPatch!
+  companyName: String!
+}
+
+"""The output of our update `Department` mutation."""
+type UpdateDepartmentPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Department` that was updated by this mutation."""
+  department: Department
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Company` that is related to this `Department`."""
+  company: Company
+
+  """An edge for our `Department`. May be used by Relay 1."""
+  departmentEdge(
+    """The method to use when ordering `Department`."""
+    orderBy: [DepartmentsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): DepartmentsEdge
+}
+
+"""All input for the `updateDepartmentByNodeId` mutation."""
+input UpdateDepartmentByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Department` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Department` being updated.
+  """
+  patch: DepartmentPatch!
+}
+
+"""
+Represents an update to a `Department`. Fields that are set will be updated.
+"""
+input DepartmentPatch {
+  departmentId: BigInt
+  companyId: BigInt
+  departmentName: String
+}
+
+"""All input for the `updateDepartment` mutation."""
+input UpdateDepartmentInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Department` being updated.
+  """
+  patch: DepartmentPatch!
+  departmentId: BigInt!
+}
+
+"""All input for the `updateDepartmentByDepartmentName` mutation."""
+input UpdateDepartmentByDepartmentNameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Department` being updated.
+  """
+  patch: DepartmentPatch!
+  departmentName: String!
+}
+
+"""The output of our update `Employee` mutation."""
+type UpdateEmployeePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Employee` that was updated by this mutation."""
+  employee: Employee
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Department` that is related to this `Employee`."""
+  department: Department
+
+  """An edge for our `Employee`. May be used by Relay 1."""
+  employeeEdge(
+    """The method to use when ordering `Employee`."""
+    orderBy: [EmployeesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EmployeesEdge
+}
+
+"""All input for the `updateEmployeeByNodeId` mutation."""
+input UpdateEmployeeByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Employee` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Employee` being updated.
+  """
+  patch: EmployeePatch!
+}
+
+"""
+Represents an update to a `Employee`. Fields that are set will be updated.
+"""
+input EmployeePatch {
+  employeeId: BigInt
+  departmentId: BigInt
+  employeeName: String
+  employeeEmail: String
+  employeeAge: Int
+  employeePost: String
+  employeeBasic: Int
+  joiningDate: Datetime
+  status: Boolean
+}
+
+"""All input for the `updateEmployee` mutation."""
+input UpdateEmployeeInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Employee` being updated.
+  """
+  patch: EmployeePatch!
+  employeeId: BigInt!
+}
+
+"""The output of our update `Sale` mutation."""
+type UpdateSalePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Sale` that was updated by this mutation."""
+  sale: Sale
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Employee` that is related to this `Sale`."""
+  salesPerson: Employee
+
+  """An edge for our `Sale`. May be used by Relay 1."""
+  saleEdge(
+    """The method to use when ordering `Sale`."""
+    orderBy: [SalesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SalesEdge
+}
+
+"""All input for the `updateSaleByNodeId` mutation."""
+input UpdateSaleByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Sale` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Sale` being updated.
+  """
+  patch: SalePatch!
+}
+
+"""Represents an update to a `Sale`. Fields that are set will be updated."""
+input SalePatch {
+  salesId: BigInt
+
+  """
+  {"Validations": {"StringLengthValidation": {"params":{"min":2, "max":50}, "msg":"Length must be between 2 to 50"} }}
+  """
+  productName: String
+  price: Float
+  customerName: String
+  salesPersonId: BigInt
+  saleDate: Datetime
+}
+
+"""All input for the `updateSale` mutation."""
+input UpdateSaleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Sale` being updated.
+  """
+  patch: SalePatch!
+  salesId: BigInt!
+}
+
+"""The output of our delete `Company` mutation."""
+type DeleteCompanyPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Company` that was deleted by this mutation."""
+  company: Company
+  deletedCompanyNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Company`. May be used by Relay 1."""
+  companyEdge(
+    """The method to use when ordering `Company`."""
+    orderBy: [CompaniesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CompaniesEdge
+}
+
+"""All input for the `deleteCompanyByNodeId` mutation."""
+input DeleteCompanyByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Company` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteCompany` mutation."""
+input DeleteCompanyInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  companyId: BigInt!
+}
+
+"""All input for the `deleteCompanyByCompanyName` mutation."""
+input DeleteCompanyByCompanyNameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  companyName: String!
+}
+
+"""The output of our delete `Department` mutation."""
+type DeleteDepartmentPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Department` that was deleted by this mutation."""
+  department: Department
+  deletedDepartmentNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Company` that is related to this `Department`."""
+  company: Company
+
+  """An edge for our `Department`. May be used by Relay 1."""
+  departmentEdge(
+    """The method to use when ordering `Department`."""
+    orderBy: [DepartmentsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): DepartmentsEdge
+}
+
+"""All input for the `deleteDepartmentByNodeId` mutation."""
+input DeleteDepartmentByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Department` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteDepartment` mutation."""
+input DeleteDepartmentInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  departmentId: BigInt!
+}
+
+"""All input for the `deleteDepartmentByDepartmentName` mutation."""
+input DeleteDepartmentByDepartmentNameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  departmentName: String!
+}
+
+"""The output of our delete `Employee` mutation."""
+type DeleteEmployeePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Employee` that was deleted by this mutation."""
+  employee: Employee
+  deletedEmployeeNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Department` that is related to this `Employee`."""
+  department: Department
+
+  """An edge for our `Employee`. May be used by Relay 1."""
+  employeeEdge(
+    """The method to use when ordering `Employee`."""
+    orderBy: [EmployeesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EmployeesEdge
+}
+
+"""All input for the `deleteEmployeeByNodeId` mutation."""
+input DeleteEmployeeByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Employee` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteEmployee` mutation."""
+input DeleteEmployeeInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  employeeId: BigInt!
+}
+
+"""The output of our delete `Sale` mutation."""
+type DeleteSalePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Sale` that was deleted by this mutation."""
+  sale: Sale
+  deletedSaleNodeId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Employee` that is related to this `Sale`."""
+  salesPerson: Employee
+
+  """An edge for our `Sale`. May be used by Relay 1."""
+  saleEdge(
+    """The method to use when ordering `Sale`."""
+    orderBy: [SalesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SalesEdge
+}
+
+"""All input for the `deleteSaleByNodeId` mutation."""
+input DeleteSaleByNodeIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Sale` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteSale` mutation."""
+input DeleteSaleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  salesId: BigInt!
+}
+
+"""The output of our upsert `Company` mutation."""
+type UpsertCompanyPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Company` that was upserted by this mutation."""
+  company: Company
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Company`. May be used by Relay 1."""
+  companyEdge(
+    """The method to use when ordering `Company`."""
+    orderBy: [CompaniesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): CompaniesEdge
+}
+
+"""Where conditions for the upsert `Company` mutation."""
+input UpsertCompanyWhere {
+  companyId: BigInt
+  companyName: String
+}
+
+"""All input for the upsert `Company` mutation."""
+input UpsertCompanyInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Company` to be upserted by this mutation."""
+  company: CompanyInput!
+}
+
+"""The output of our upsert `Department` mutation."""
+type UpsertDepartmentPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Department` that was upserted by this mutation."""
+  department: Department
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Company` that is related to this `Department`."""
+  company: Company
+
+  """An edge for our `Department`. May be used by Relay 1."""
+  departmentEdge(
+    """The method to use when ordering `Department`."""
+    orderBy: [DepartmentsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): DepartmentsEdge
+}
+
+"""Where conditions for the upsert `Department` mutation."""
+input UpsertDepartmentWhere {
+  departmentId: BigInt
+  departmentName: String
+}
+
+"""All input for the upsert `Department` mutation."""
+input UpsertDepartmentInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Department` to be upserted by this mutation."""
+  department: DepartmentInput!
+}
+
+"""The output of our upsert `Employee` mutation."""
+type UpsertEmployeePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Employee` that was upserted by this mutation."""
+  employee: Employee
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Department` that is related to this `Employee`."""
+  department: Department
+
+  """An edge for our `Employee`. May be used by Relay 1."""
+  employeeEdge(
+    """The method to use when ordering `Employee`."""
+    orderBy: [EmployeesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): EmployeesEdge
+}
+
+"""Where conditions for the upsert `Employee` mutation."""
+input UpsertEmployeeWhere {
+  employeeId: BigInt
+}
+
+"""All input for the upsert `Employee` mutation."""
+input UpsertEmployeeInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Employee` to be upserted by this mutation."""
+  employee: EmployeeInput!
+}
+
+"""The output of our upsert `Sale` mutation."""
+type UpsertSalePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Sale` that was upserted by this mutation."""
+  sale: Sale
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Employee` that is related to this `Sale`."""
+  salesPerson: Employee
+
+  """An edge for our `Sale`. May be used by Relay 1."""
+  saleEdge(
+    """The method to use when ordering `Sale`."""
+    orderBy: [SalesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): SalesEdge
+}
+
+"""Where conditions for the upsert `Sale` mutation."""
+input UpsertSaleWhere {
+  salesId: BigInt
+}
+
+"""All input for the upsert `Sale` mutation."""
+input UpsertSaleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Sale` to be upserted by this mutation."""
+  sale: SaleInput!
+}
+
+"""
+Used to represent a set of fields. Grammatically, a field set is a
+selection set minus the braces.
+"""
+scalar _FieldSet

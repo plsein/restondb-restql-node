@@ -1,0 +1,1008 @@
+{
+	"info": {
+		"_postman_id": "bd605406-859a-43bd-bbd3-dbd9a4beb82c",
+		"name": "RestQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30439882"
+	},
+	"item": [
+		{
+			"name": "NodeJS",
+			"item": [
+				{
+					"name": "Custom",
+					"item": [
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"mail@email.com\",\r\n    \"password\":\"password1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/login",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "register",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBhc3N3b3JkQGVtYWlsLmNvbSIsInVzZXJfaWQiOiIxIiwiaWF0IjoxNjc3NTAxOTI5LCJleHAiOjE2Nzc1MjM1Mjl9.Sx0Cq5o5L5aNZZi_OBhCpPg9_dp2-zAhWMXu-EZmDz4",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n\"username\":\"User1\",\r\n\"email\":\"User1@email.com\",\r\n\"password\":\"password4\",\r\n\"employeeId\":4,\r\n\"active\":true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/user-register",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"user-register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "token",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Token\", function () {\r",
+											"    if(pm.response.to.have.status(200)) {\r",
+											"        pm.environment.set(\"API_TOKEN\", pm.response.json().data.token);\r",
+											"    }\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"key\": \"authkey\",\r\n  \"secret\": \"authsecret\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/token",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "upload",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiaGlqZWV0c2VuZ2FyMTBAZ21haWwuY29tIiwidWlkIjoiMSIsInNjb3BlIjoiQ0ZNX0FkbWluIiwibmFtZSI6Ikpvc2hlcGgiLCJpYXQiOjE2ODA2OTI2MzEsImV4cCI6MTY4MDY5MjkzMX0.EhUO0-iYRnxx_2_ak5q5WomzZ0SvCMCsoBEg9Wbtnf8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "entity_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "entity_type",
+											"value": "user",
+											"type": "text"
+										},
+										{
+											"key": "entity_field",
+											"value": "user image",
+											"type": "text"
+										},
+										{
+											"key": "profile",
+											"type": "file",
+											"src": "/D:/programs/Microsoft/VSCode/resources/app/resources/win32/code_150x150.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{API_URL}}/uploads",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"uploads"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "change password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":5,\r\n    \"old_password\":\"password1\",\r\n    \"new_password\" : \"password2\",\r\n    \"confirm_password\":\"password2\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/change-password",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"change-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "forgot password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"email\":\"mail@email.com\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/forgot-password",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"forgot-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "token-validation",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"email\":\"mail@email.com\",\r\n   \"otp\":2427,\r\n   \"new_password\":\"password1\",\r\n   \"confirm_password\":\"password1\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{API_URL}}/token-validation",
+									"host": [
+										"{{API_URL}}"
+									],
+									"path": [
+										"token-validation"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GraphQL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query IntrospectionQuery { \r\n    __schema {  \r\n        queryType { name } \r\n        mutationType { name } \r\n        subscriptionType { name } \r\n        types { ...FullType } \r\n        directives { name description  locations args { ...InputValue } } \r\n    } \r\n} \r\nfragment FullType on __Type { \r\n    kind \r\n    name \r\n    description  \r\n    fields(includeDeprecated: true) { \r\n        name description args { ...InputValue } type { ...TypeRef } \r\n        isDeprecated deprecationReason \r\n    } \r\n    inputFields { ...InputValue } \r\n    interfaces { ...TypeRef } \r\n    enumValues(includeDeprecated: true) { \r\n        name \r\n        description \r\n        isDeprecated \r\n        deprecationReason \r\n    } \r\n    possibleTypes { ...TypeRef } \r\n} \r\nfragment InputValue on __InputValue { \r\n    name \r\n    description type { ...TypeRef } \r\n    defaultValue \r\n} \r\nfragment TypeRef on __Type { \r\n    kind \r\n    name \r\n    ofType { \r\n        kind \r\n        name \r\n        ofType { \r\n            kind \r\n            name \r\n            ofType { \r\n                kind \r\n                name \r\n                ofType { \r\n                    kind \r\n                    name \r\n                    ofType { \r\n                        kind \r\n                        name \r\n                        ofType { \r\n                            kind \r\n                            name \r\n                            ofType { kind name } \r\n                        } \r\n                    } \r\n                } \r\n            } \r\n        } \r\n    } \r\n}",
+								"variables": "{\"from\":\"2022-01-01\",\r\n\"to\":\"2022-03-15\"}"
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/graphql",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Token\", function () {\r",
+									"    if(pm.response.to.have.status(200)) {\r",
+									"        pm.environment.set(\"API_TOKEN\", pm.response.json().data.token);\r",
+									"        // pm.collectionVariables.set(\"API_TOKEN\", pm.response.json().data.token);\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"key\": \"authkey\",\r\n    \"secret\": \"authsecret\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/token",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Select Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fields\": [\"sum(s.price) as total_sales\", \"avg(s.price) as average_sales\", \"d.department_name as department\", \"e.employee_name\"],\r\n  \"table\": \"employee e\",\r\n  \"inner\": [{\"table\": \"department d\", \"relation\": \"e.department_id = d.department_id\"}],\r\n  \"left\": [{\"table\": \"sales s\", \"relation\": \"s.sales_person_id = e.employee_id and s.sale_date >= :sale_date\"}],\r\n  \"where\": \"e.employee_name like :employee_name and e.status = :status and e.joining_date >= :joining_date\",\r\n  \"group\": [\"d.department_name\", \"e.employee_name\"],\r\n  \"having\": \"sum(s.price) >= :price\",\r\n  \"sort\": [\"sum(s.price) asc\"],\r\n  \"bind\": {\"employee_name\": \"%e%\", \"status\": true, \"joining_date\": \"2020-01-01\", \"price\": 100, \"sale_date\": \"2023-10-01\"},\r\n  \"limit\": 2,\r\n  \"offset\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/select",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"select"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"table\": \"sales\",\r\n  \"records\": [{\r\n    \"product_name\": \"test product 104\",\r\n    \"sales_person_id\": 4,\r\n    \"price\": 1000,\r\n    \"customer_name\": \"test customer 1\",\r\n    \"sale_date\": \"2023-10-10\"\r\n  },{\r\n    \"product_name\": \"test product 104\",\r\n    \"sales_person_id\": 7,\r\n    \"price\": 1000,\r\n    \"customer_name\": \"test customer 2\",\r\n    \"sale_date\": \"2023-10-10\"\r\n  }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/add",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"objects\": [{\r\n    \"table\": \"sales\",\r\n    \"where\": \"product_name = 'test product 102'\",   // only in effect if bind is empty\r\n    \"bind\": {\"sales_id\": 6},\r\n    \"record\": {\r\n      \"product_name\": \"test product 103\",\r\n      \"sales_person_id\": 7,\r\n      \"sale_date\": \"2023-10-11\"\r\n    }\r\n  }, {\r\n    \"table\": \"sales\",\r\n    \"where\": \"product_name = 'test product 104'\",   // only in effect if bind is empty\r\n    // \"bind\": {\"sales_id\": 7},\r\n    \"record\": {\r\n      \"product_name\": \"test product 105\",\r\n      \"sales_person_id\": 4,\r\n      \"sale_date\": \"2023-10-11\"\r\n    }\r\n  }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/edit",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"objects\":[\r\n    {\r\n      \"table\": \"sales\",\r\n      \"where\": \"sales_id IN ('6', '7')\",    // only in effect if bind is empty\r\n      \"bind\": {\"sales_id\": [4, 5]}\r\n    }, {\r\n      \"table\": \"sales\",\r\n      \"where\": \"sales_id IN ('6', '7')\"     // only in effect if bind is empty\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/delete",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Python",
+			"item": [
+				{
+					"name": "ServiceToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Token\", function () {\r",
+									"    if(pm.response.to.have.status(200)) {\r",
+									"        pm.environment.set(\"API_TOKEN\", pm.response.json().data[0].token);\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"key\": \"authkey\",\r\n  \"secret\": \"authsecret\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/oauth/token",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SelectAPI",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fields\": [\"sum(price) as total_sales\", \"avg(price)*:mul as average_sales\", \"department.department_name as department\", \"employee.employee_name\"],\r\n  \"table\": \"employee\",\r\n  \"inner\": [\"department\"],\r\n  \"left\": [\"sales\"],\r\n  \"where\": \"employee_name like :employee_name and employee.status = :status and joining_date >= :joining_date and sale_date>= :sale_date\",\r\n  \"group\": [\"department_name\", \"employee.employee_name\"],\r\n  \"having\": \"sum(sales.price) >= :price\",\r\n  \"sort\": [\"sum(sales.price) asc\"],\r\n  \"bind\": {\"mul\":1,\"employee_name\": \"%e%\", \"status\": true, \"joining_date\": \"2020-01-01\", \"price\": 100, \"sale_date\": \"2023-10-01\"},\r\n  \"limit\": 2,\r\n  \"offset\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/select",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"select"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GraphQL",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query IntrospectionQuery { \r\n    __schema {  \r\n        queryType { name } \r\n        mutationType { name } \r\n        subscriptionType { name } \r\n        types { ...FullType } \r\n        directives { name description  locations args { ...InputValue } } \r\n    } \r\n} \r\nfragment FullType on __Type { \r\n    kind \r\n    name \r\n    description  \r\n    fields(includeDeprecated: true) { \r\n        name description args { ...InputValue } type { ...TypeRef } \r\n        isDeprecated deprecationReason \r\n    } \r\n    inputFields { ...InputValue } \r\n    interfaces { ...TypeRef } \r\n    enumValues(includeDeprecated: true) { \r\n        name \r\n        description \r\n        isDeprecated \r\n        deprecationReason \r\n    } \r\n    possibleTypes { ...TypeRef } \r\n} \r\nfragment InputValue on __InputValue { \r\n    name \r\n    description type { ...TypeRef } \r\n    defaultValue \r\n} \r\nfragment TypeRef on __Type { \r\n    kind \r\n    name \r\n    ofType { \r\n        kind \r\n        name \r\n        ofType { \r\n            kind \r\n            name \r\n            ofType { \r\n                kind \r\n                name \r\n                ofType { \r\n                    kind \r\n                    name \r\n                    ofType { \r\n                        kind \r\n                        name \r\n                        ofType { \r\n                            kind \r\n                            name \r\n                            ofType { kind name } \r\n                        } \r\n                    } \r\n                } \r\n            } \r\n        } \r\n    } \r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/graphql",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddAPI",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"table\": \"sales\",\r\n  \"records\": [{\r\n    \"product_name\": \"test product 104\",\r\n    \"sales_person_id\": 4,\r\n    \"price\": 1000,\r\n    \"customer_name\": \"test customer 1\",\r\n    \"sale_date\": \"2023-10-10\"\r\n  }, {\r\n    \"product_name\": \"test product 104\",\r\n    \"sales_person_id\": 7,\r\n    \"price\": 1000,\r\n    \"customer_name\": \"test customer 2\",\r\n    \"sale_date\": \"2023-10-10\"\r\n  }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/add",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditAPI",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"objects\": [{\r\n    \"table\": \"sales\",\r\n    \"where\": \"sales_id = :salesId and product_name = :productName\",\r\n    \"bind\": {\"salesId\": 8, \"productName\": \"test product 102\"},\r\n    \"record\": {\r\n      \"product_name\": \"test product 103\",\r\n      \"sales_person_id\": 7,\r\n      \"sale_date\": \"2023-10-11\"\r\n    }\r\n  }, {\r\n    \"table\": \"sales\",\r\n    \"where\": \"sales_id = :salesId and product_name = :productName\",\r\n    \"bind\": {\"salesId\": 9, \"productName\": \"test product 104\"},\r\n    \"record\": {\r\n      \"product_name\": \"test product 105\",\r\n      \"sales_person_id\": 4,\r\n      \"sale_date\": \"2023-10-11\"\r\n    }\r\n  }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/edit",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAPI",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"objects\":[\r\n    {\r\n      \"table\": \"sales\",\r\n      \"where\": \"sales_id = :salesId\",\r\n      \"bind\": {\"salesId\": 8}\r\n    }, {\r\n      \"table\": \"sales\",\r\n      \"where\": \"sales_id = :salesId\",\r\n      \"bind\": {\"salesId\": 9}\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_URL}}/api/delete",
+							"host": [
+								"{{API_URL}}"
+							],
+							"path": [
+								"api",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PHP",
+			"item": [
+				{
+					"name": "ServiceToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Token\", function () {\r",
+									"    if(pm.response.to.have.status(200)) {\r",
+									"        pm.environment.set(\"API_TOKEN\", pm.response.json().data.token);\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"key\": \"authkey\",\r\n  \"secret\": \"authsecret\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PHP_API_URL}}/api/token",
+							"host": [
+								"{{PHP_API_URL}}"
+							],
+							"path": [
+								"api",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SelectAPI",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fields\": [\"sum(s.price) as total_sales\", \"avg(s.price)*:mul as average_sales\", \"d.department_name as department\", \"e.employee_name\"],\r\n  \"table\": \"employee e\",\r\n  \"inner\": [{\"table\": \"department d\", \"relation\": \"e.department_id = d.department_id\"}],\r\n  \"left\": [{\"table\": \"sales s\", \"relation\": \"s.sales_person_id = e.employee_id and s.sale_date >= :sale_date\"}],\r\n  \"where\": \"e.employee_name like :employee_name and e.status = :status and e.joining_date >= :joining_date\",\r\n  \"group\": [\"d.department_name\", \"e.employee_name\"],\r\n  \"having\": \"sum(s.price) >= :price\",\r\n  \"sort\": [\"sum(s.price) asc\"],\r\n  \"bind\": {\"mul\": 1, \"employee_name\": \"%e%\", \"status\": true, \"joining_date\": \"2020-01-01\", \"price\": 100, \"sale_date\": \"2023-10-01\"},\r\n  \"limit\": 2,\r\n  \"offset\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PHP_API_URL}}/api/select",
+							"host": [
+								"{{PHP_API_URL}}"
+							],
+							"path": [
+								"api",
+								"select"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddAPI",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"table\": \"sales\",\r\n  \"records\": [{\r\n    \"product_name\": \"test product 104\",\r\n    \"sales_person_id\": 4,\r\n    \"price\": 1000,\r\n    \"customer_name\": \"test customer 1\",\r\n    \"sale_date\": \"2023-10-10\"\r\n  },{\r\n    \"product_name\": \"test product 104\",\r\n    \"sales_person_id\": 7,\r\n    \"price\": 1000,\r\n    \"customer_name\": \"test customer 2\",\r\n    \"sale_date\": \"2023-10-10\"\r\n  }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PHP_API_URL}}/api/insert",
+							"host": [
+								"{{PHP_API_URL}}"
+							],
+							"path": [
+								"api",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditAPI",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"objects\": [{\r\n    \"table\": \"sales\",\r\n    \"where\": \"sales_id = ? and product_name = ?\",\r\n    \"bindings\": [10, \"test product 102\"],\r\n    \"data\": {\r\n      \"product_name\": \"test product 103\",\r\n      \"sales_person_id\": 7,\r\n      \"sale_date\": \"2023-10-11\"\r\n    }\r\n  }, {\r\n    \"table\": \"sales\",\r\n    \"where\": \"sales_id = ? and product_name = ?\",\r\n    \"bindings\": [11, \"test product 104\"],\r\n    \"data\": {\r\n      \"product_name\": \"test product 105\",\r\n      \"sales_person_id\": 7,\r\n      \"sale_date\": \"2023-10-11\"\r\n    }\r\n  }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PHP_API_URL}}/api/update",
+							"host": [
+								"{{PHP_API_URL}}"
+							],
+							"path": [
+								"api",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAPI",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"objects\":[{\r\n    \"table\": \"sales\",\r\n    \"where\": \"sales_id = :salesId\",\r\n    \"bindings\": {\"salesId\": 10}\r\n  }, {\r\n    \"table\": \"sales\",\r\n    \"where\": \"sales_id = :salesId\",\r\n    \"bindings\": {\"salesId\": 11}\r\n  }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PHP_API_URL}}/api/delete",
+							"host": [
+								"{{PHP_API_URL}}"
+							],
+							"path": [
+								"api",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IncrementUpdate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"table\": \"employee\",\r\n  \"where\": \"employee_id=?\",\r\n  \"bindings\": [4],\r\n  \"data\": {\r\n    \"employee_age\": 2\r\n  },\r\n  \"other\": {\r\n    \"joining_date\": \"2022-08-01 10:30:31\",\r\n    \"status\": true\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PHP_API_URL}}/api/increment",
+							"host": [
+								"{{PHP_API_URL}}"
+							],
+							"path": [
+								"api",
+								"increment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DecrementUpdate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{API_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"table\": \"employee\",\r\n  \"where\": \"employee_id=?\",\r\n  \"bindings\": [4],\r\n  \"data\": {\r\n    \"employee_age\": 2\r\n  },\r\n  \"other\": {\r\n    \"joining_date\": \"2022-08-01 10:30:31\",\r\n    \"status\": true\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{PHP_API_URL}}/api/decrement",
+							"host": [
+								"{{PHP_API_URL}}"
+							],
+							"path": [
+								"api",
+								"decrement"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "API_TOKEN",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

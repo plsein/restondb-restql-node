@@ -1,0 +1,66 @@
+# This is the SAM template that represents the architecture of your serverless application
+# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template-basics.html
+
+# The AWSTemplateFormatVersion identifies the capabilities of the template
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/format-version-structure.html
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  db-service
+
+# Transform section specifies one or more macros that AWS CloudFormation uses to process your template
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html
+Transform:
+- AWS::Serverless-2016-10-31
+
+# Resources declares the AWS resources that you want to include in the stack
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
+Resources:
+  # Each Lambda function is defined by properties:
+  # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+  DbServiceAPILayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: DbServiceAPILayer
+      Description: DB Service APInodejs dependencies
+    CompatibleRuntimes:
+      - nodejs12.x
+      - nodejs14.x
+      - nodejs16.x
+    Metadata:
+      BuildMethod: nodejs16.x
+      BuildArchitecture: x86_64
+    RetentionPolicy: Retain
+
+  DbServiceAPIFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: nodejs/api/
+      Handler: app.lambdaHandler
+      Layers:
+        - !Ref DbServiceAPILayer
+      Runtime: nodejs16.x
+      Events:
+        ApiEvents:
+          Type: HttpApi
+          Properties:
+            Path: /{proxy+}
+            Method: any
+      VpcConfig:
+        SecurityGroupIds:
+          - sg-0f066bb84ae0aad33
+        SubnetIds:
+          - subnet-0b314802eac03bdcf
+          - subnet-09c2baa68ca618189
+          - subnet-0384c938c2920cd44
+
+Outputs:
+  DbServiceAPI:
+    Description: "API Gateway endpoint URL for Prod stage of DB Service API"
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com"
+  DbServiceAPIFunction:
+    Description: "DB Service API Lambda Function ARN for DB Service API"
+    Value: !GetAtt DbServiceAPIFunction.Arn
+  DbServiceFunctionIamRole:
+    Description: "Implicit IAM Role for DB Service API"
+    Value: !GetAtt DbServiceAPIFunctionRole.Arn
+

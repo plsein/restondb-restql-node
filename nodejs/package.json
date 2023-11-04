@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "@brooklyn-labs/postgraphile-plugin-apollo-federation": "^0.4.4",
+    "@graphile-contrib/pg-many-to-many": "^1.0.1",
+    "@graphile-contrib/pg-simplify-inflector": "^6.1.0",
+    "@graphile/operation-hooks": "^1.0.0",
+    "@graphile/pg-aggregates": "^0.1.0",
+    "@graphile/pg-pubsub": "^4.12.3",
+    "aws-sdk": "^2.799.0",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "express-jwt": "^7.7.5",
+    "http-status": "^1.6.2",
+    "jwks-rsa": "^2.1.4",
+    "pg": "^8.10.0",
+    "pg-format": "^1.0.4",
+    "pg-hstore": "^2.3.4",
+    "pino": "^8.11.0",
+    "pino-http": "^8.3.3",
+    "pino-pretty": "^10.0.0",
+    "postgraphile": "^4.12.11",
+    "postgraphile-plugin-connection-filter": "^2.3.0",
+    "postgraphile-plugin-connection-multi-tenant": "^0.0.2",
+    "postgraphile-plugin-derived-field": "^1.0.0-alpha.7",
+    "postgraphile-plugin-fulltext-filter": "^1.0.0-beta.7",
+    "postgraphile-plugin-many-create-update-delete": "^1.0.7",
+    "postgraphile-upsert-plugin": "^3.2.2",
+    "qs": "^6.11.1",
+    "rotating-file-stream": "^3.1.0",
+    "sequelize": "^6.30.0",
+    "serverless-http": "^3.0.2"
+  }
+}

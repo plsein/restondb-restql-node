@@ -1,0 +1,13 @@
+version: "3.3"
+services:
+  db-service:
+    image: db-service:1.0.1
+    container_name: db-service_v1.0.1
+    build: ./
+    env_file:
+      - ./nodejs/.env
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./nodejs/:/app/
+    #restart: always
