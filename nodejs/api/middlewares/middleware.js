@@ -1,5 +1,5 @@
 const httpStatus = require('http-status');
-const { Utils } = require('../utils/utils');
+const { CommonUtils } = require('../utils/common_utils');
 
 /**
  * Error handler function
@@ -8,14 +8,14 @@ const { Utils } = require('../utils/utils');
  * @param {*} res Response Object
  * @param {*} next Next process
  */
-exports.errorHandler = function(err, req, res, next) {
+exports.errorHandler = (err, req, res, next) => {
   if (err && next && res.headersSent) {
     return next(err);
   } else if (err) {
     // Log the error but don't send back internal operational details like a stack trace to the client!
-    Utils.reqLog(req, err.message);
+    CommonUtils.reqLog(req, err.message);
     if (err.msg) {
-      err.msg = err.msg;
+      err.msg = (err.msg?.error)? err.msg['error'] : err.msg;
     } else if (err.status == 400) {
       err.msg = 'Bad Request';
     } else if (err.status == 500 || err.status == 501) {
@@ -37,6 +37,6 @@ exports.errorHandler = function(err, req, res, next) {
  * @param {*} res Response object
  * @param {*} next Next process
  */
-exports.initMiddleware = function(req, res, next) {
+exports.initMiddleware = (req, res, next) => {
   return next();
 }

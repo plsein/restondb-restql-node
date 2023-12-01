@@ -43,7 +43,7 @@ class Config {
 
   static SECRET_KEY = process.env.AUTH_SECRET;
 
-  static TOKEN_EXPIRY_SEC = process.env.TOKEN_EXPIRY_SEC;
+  static TOKEN_EXPIRY_MILLISEC = process.env.TOKEN_EXPIRY_MILLISEC;
 
   static LOG_DIR = process.env.LOG_DIR;
 

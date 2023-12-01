@@ -4,7 +4,7 @@ const pino = require('pino');
 const pretty = require('pino-pretty');
 const { Config } = require('./config');
 
-// const info_stream = fs.createWriteStream(Config['LOG_DIR']+'/info.stream.out');
+// const info_stream = fs.createWriteStream(Config['LOG_DIR']+'/info.stream.log');
 const streams = [
   {level: 'info', stream: rfs.createStream(Config['LOG_DIR']+'/info.log', {size: "1M", interval: "1d", compress: "gzip"})},
   {stream: pretty() },
@@ -16,9 +16,9 @@ const appLog = pino({
   level: 'debug' // this MUST be set at the lowest level of the destinations
 }, pino.multistream(streams));
 
-appLog.debug('this will be written to debug.stream.out');
-appLog.info('this will be written to debug.stream.out and info.stream.out');
-appLog.fatal('this will be written to debug.stream.out, info.stream.out and fatal.stream.out');
+appLog.debug('this will be written to debug.stream.log');
+appLog.info('this will be written to debug.stream.log and info.stream.log');
+appLog.fatal('this will be written to debug.stream.log, info.stream.log and fatal.stream.log');
 
 /**
  * Reference: https://github.com/pinojs/pino-http
