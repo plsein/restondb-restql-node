@@ -462,6 +462,107 @@
               "deprecationReason": null
             },
             {
+              "name": "userProfiles",
+              "description": "Reads and enables pagination through a set of `UserProfile`.",
+              "args": [
+                {
+                  "name": "first",
+                  "description": "Only read the first `n` values of the set.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "last",
+                  "description": "Only read the last `n` values of the set.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "offset",
+                  "description": "Skip the first `n` values from our `after` cursor, an alternative to cursor\nbased pagination. May not be used with `last`.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "before",
+                  "description": "Read all values in the set before (above) this cursor.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Cursor",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "after",
+                  "description": "Read all values in the set after (below) this cursor.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Cursor",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "orderBy",
+                  "description": "The method to use when ordering `UserProfile`.",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "ENUM",
+                        "name": "UserProfilesOrderBy",
+                        "ofType": null
+                      }
+                    }
+                  },
+                  "defaultValue": "[PRIMARY_KEY_ASC]"
+                },
+                {
+                  "name": "condition",
+                  "description": "A condition to be used in determining which values should be returned by the collection.",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserProfileCondition",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "A filter to be used in determining which values should be returned by the collection.",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserProfileFilter",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfilesConnection",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "company",
               "description": null,
               "args": [
@@ -624,6 +725,33 @@
               "deprecationReason": null
             },
             {
+              "name": "userProfile",
+              "description": null,
+              "args": [
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "BigInt",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfile",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "companyByNodeId",
               "description": "Reads a single `Company` using its globally unique `ID`.",
               "args": [
@@ -726,6 +854,33 @@
               "type": {
                 "kind": "OBJECT",
                 "name": "Sale",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "userProfileByNodeId",
+              "description": "Reads a single `UserProfile` using its globally unique `ID`.",
+              "args": [
+                {
+                  "name": "nodeId",
+                  "description": "The globally unique `ID` to be used in selecting a single `UserProfile`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "ID",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfile",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -851,6 +1006,11 @@
             {
               "kind": "OBJECT",
               "name": "Sale",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserProfile",
               "ofType": null
             }
           ]
@@ -1944,6 +2104,111 @@
                 "ofType": {
                   "kind": "OBJECT",
                   "name": "SalesConnection",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "userProfiles",
+              "description": "Reads and enables pagination through a set of `UserProfile`.",
+              "args": [
+                {
+                  "name": "first",
+                  "description": "Only read the first `n` values of the set.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "last",
+                  "description": "Only read the last `n` values of the set.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "offset",
+                  "description": "Skip the first `n` values from our `after` cursor, an alternative to cursor\nbased pagination. May not be used with `last`.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "before",
+                  "description": "Read all values in the set before (above) this cursor.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Cursor",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "after",
+                  "description": "Read all values in the set after (below) this cursor.",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Cursor",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "orderBy",
+                  "description": "The method to use when ordering `UserProfile`.",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "ENUM",
+                        "name": "UserProfilesOrderBy",
+                        "ofType": null
+                      }
+                    }
+                  },
+                  "defaultValue": "[PRIMARY_KEY_ASC]"
+                },
+                {
+                  "name": "condition",
+                  "description": "A condition to be used in determining which values should be returned by the collection.",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserProfileCondition",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "filter",
+                  "description": "A filter to be used in determining which values should be returned by the collection.",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserProfileFilter",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "UserProfilesConnection",
                   "ofType": null
                 }
               },
@@ -5161,6 +5426,26 @@
               "defaultValue": null
             },
             {
+              "name": "userProfilesList",
+              "description": "Filter by the object’s `userProfilesList` relation.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "EmployeeToManyUserProfileFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "userProfilesListExist",
+              "description": "Some related `userProfilesList` exist.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "department",
               "description": "Filter by the object’s `department` relation.",
               "type": {
@@ -6180,6 +6465,784 @@
             },
             {
               "name": "salesPersonId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "EmployeeToManyUserProfileFilter",
+          "description": "A filter to be used against many `UserProfile` object types. All fields are combined with a logical ‘and.’",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "every",
+              "description": "Every related `UserProfile` matches the filter criteria. All fields are combined with a logical ‘and.’",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "some",
+              "description": "Some related `UserProfile` matches the filter criteria. All fields are combined with a logical ‘and.’",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "none",
+              "description": "No related `UserProfile` matches the filter criteria. All fields are combined with a logical ‘and.’",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "aggregates",
+              "description": "Aggregates across related `UserProfile` match the filter criteria.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileAggregatesFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileFilter",
+          "description": "A filter to be used against `UserProfile` object types. All fields are combined with a logical ‘and.’",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": "Filter by the object’s `id` field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": "Filter by the object’s `name` field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "StringFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "pic",
+              "description": "Filter by the object’s `pic` field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "StringFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "password",
+              "description": "Filter by the object’s `password` field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "StringFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "email",
+              "description": "Filter by the object’s `email` field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "StringFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": "Filter by the object’s `employeeId` field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "active",
+              "description": "Filter by the object’s `active` field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BooleanFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": "Filter by the object’s `otp` field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": "Filter by the object’s `otpExpireTime` field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "DatetimeFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "role",
+              "description": "Filter by the object’s `role` field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "StringFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employee",
+              "description": "Filter by the object’s `employee` relation.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "EmployeeFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeExists",
+              "description": "A related `employee` exists.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "and",
+              "description": "Checks for all expressions in this list.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserProfileFilter",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "or",
+              "description": "Checks for any expressions in this list.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserProfileFilter",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "not",
+              "description": "Negates the expression.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileAggregatesFilter",
+          "description": "A filter to be used against aggregates of `UserProfile` object types.",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "filter",
+              "description": "A filter that must pass for the relevant `UserProfile` object to be included within the aggregate.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "sum",
+              "description": "Sum aggregate over matching `UserProfile` objects.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileSumAggregateFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "distinctCount",
+              "description": "Distinct count aggregate over matching `UserProfile` objects.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileDistinctCountAggregateFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "min",
+              "description": "Minimum aggregate over matching `UserProfile` objects.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileMinAggregateFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "max",
+              "description": "Maximum aggregate over matching `UserProfile` objects.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileMaxAggregateFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "average",
+              "description": "Mean average aggregate over matching `UserProfile` objects.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileAverageAggregateFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "stddevSample",
+              "description": "Sample standard deviation aggregate over matching `UserProfile` objects.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileStddevSampleAggregateFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "stddevPopulation",
+              "description": "Population standard deviation aggregate over matching `UserProfile` objects.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileStddevPopulationAggregateFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "varianceSample",
+              "description": "Sample variance aggregate over matching `UserProfile` objects.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileVarianceSampleAggregateFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "variancePopulation",
+              "description": "Population variance aggregate over matching `UserProfile` objects.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileVariancePopulationAggregateFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileSumAggregateFilter",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileDistinctCountAggregateFilter",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "pic",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "password",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "email",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "active",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "role",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileMinAggregateFilter",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileMaxAggregateFilter",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigIntFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileAverageAggregateFilter",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileStddevSampleAggregateFilter",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileStddevPopulationAggregateFilter",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileVarianceSampleAggregateFilter",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileVariancePopulationAggregateFilter",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
               "description": null,
               "type": {
                 "kind": "INPUT_OBJECT",
@@ -7520,6 +8583,1997 @@
               "type": {
                 "kind": "INPUT_OBJECT",
                 "name": "BigFloatFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfilesConnection",
+          "description": "A connection to a list of `UserProfile` values.",
+          "fields": [
+            {
+              "name": "nodes",
+              "description": "A list of `UserProfile` objects.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "UserProfile",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "edges",
+              "description": "A list of edges which contains the `UserProfile` and cursor to aid in pagination.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "UserProfilesEdge",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "pageInfo",
+              "description": "Information to aid in pagination.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PageInfo",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "totalCount",
+              "description": "The count of *all* `UserProfile` you could get from the connection.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "aggregates",
+              "description": "Aggregates across the matching connection (ignoring before/after/first/last/offset)",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileAggregates",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "groupedAggregates",
+              "description": "Grouped aggregates across the matching connection (ignoring before/after/first/last/offset)",
+              "args": [
+                {
+                  "name": "groupBy",
+                  "description": "The method to use when grouping `UserProfile` for these aggregates.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": null,
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": null,
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "UserProfileGroupBy",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "having",
+                  "description": "Conditions on the grouped aggregates.",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserProfileHavingInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "UserProfileAggregates",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfile",
+          "description": null,
+          "fields": [
+            {
+              "name": "nodeId",
+              "description": "A globally unique identifier. Can be used in various places throughout the system to identify this single value.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "id",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "BigInt",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "pic",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "password",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "email",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "active",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Datetime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "role",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employee",
+              "description": "Reads a single `Employee` that is related to this `UserProfile`.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Employee",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "Node",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfilesEdge",
+          "description": "A `UserProfile` edge in the connection.",
+          "fields": [
+            {
+              "name": "cursor",
+              "description": "A cursor for use in pagination.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Cursor",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "node",
+              "description": "The `UserProfile` at the end of the edge.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "UserProfile",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfileAggregates",
+          "description": null,
+          "fields": [
+            {
+              "name": "keys",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "sum",
+              "description": "Sum aggregates across the matching connection (ignoring before/after/first/last/offset)",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileSumAggregates",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "distinctCount",
+              "description": "Distinct count aggregates across the matching connection (ignoring before/after/first/last/offset)",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileDistinctCountAggregates",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "min",
+              "description": "Minimum aggregates across the matching connection (ignoring before/after/first/last/offset)",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileMinAggregates",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "max",
+              "description": "Maximum aggregates across the matching connection (ignoring before/after/first/last/offset)",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileMaxAggregates",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "average",
+              "description": "Mean average aggregates across the matching connection (ignoring before/after/first/last/offset)",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileAverageAggregates",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "stddevSample",
+              "description": "Sample standard deviation aggregates across the matching connection (ignoring before/after/first/last/offset)",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileStddevSampleAggregates",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "stddevPopulation",
+              "description": "Population standard deviation aggregates across the matching connection (ignoring before/after/first/last/offset)",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileStddevPopulationAggregates",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "varianceSample",
+              "description": "Sample variance aggregates across the matching connection (ignoring before/after/first/last/offset)",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileVarianceSampleAggregates",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "variancePopulation",
+              "description": "Population variance aggregates across the matching connection (ignoring before/after/first/last/offset)",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileVariancePopulationAggregates",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfileSumAggregates",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "Sum of id across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "BigFloat",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employeeId",
+              "description": "Sum of employeeId across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "BigFloat",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "otp",
+              "description": "Sum of otp across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "BigFloat",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfileDistinctCountAggregates",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "Distinct count of id across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": "Distinct count of name across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "pic",
+              "description": "Distinct count of pic across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "password",
+              "description": "Distinct count of password across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "email",
+              "description": "Distinct count of email across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employeeId",
+              "description": "Distinct count of employeeId across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "active",
+              "description": "Distinct count of active across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "otp",
+              "description": "Distinct count of otp across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": "Distinct count of otpExpireTime across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "role",
+              "description": "Distinct count of role across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfileMinAggregates",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "Minimum of id across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employeeId",
+              "description": "Minimum of employeeId across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "otp",
+              "description": "Minimum of otp across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfileMaxAggregates",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "Maximum of id across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employeeId",
+              "description": "Maximum of employeeId across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "otp",
+              "description": "Maximum of otp across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfileAverageAggregates",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "Mean average of id across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employeeId",
+              "description": "Mean average of employeeId across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "otp",
+              "description": "Mean average of otp across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfileStddevSampleAggregates",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "Sample standard deviation of id across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employeeId",
+              "description": "Sample standard deviation of employeeId across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "otp",
+              "description": "Sample standard deviation of otp across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfileStddevPopulationAggregates",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "Population standard deviation of id across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employeeId",
+              "description": "Population standard deviation of employeeId across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "otp",
+              "description": "Population standard deviation of otp across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfileVarianceSampleAggregates",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "Sample variance of id across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employeeId",
+              "description": "Sample variance of employeeId across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "otp",
+              "description": "Sample variance of otp across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserProfileVariancePopulationAggregates",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "Population variance of id across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employeeId",
+              "description": "Population variance of employeeId across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "otp",
+              "description": "Population variance of otp across the matching connection",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigFloat",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
+          "name": "UserProfileGroupBy",
+          "description": "Grouping methods for `UserProfile` for usage during aggregation.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "NAME",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "PIC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "PASSWORD",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "EMAIL",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "EMPLOYEE_ID",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ACTIVE",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OTP",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OTP_EXPIRE_TIME",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OTP_EXPIRE_TIME_TRUNCATED_TO_YEAR",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OTP_EXPIRE_TIME_TRUNCATED_TO_QUARTER",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OTP_EXPIRE_TIME_TRUNCATED_TO_MONTH",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OTP_EXPIRE_TIME_TRUNCATED_TO_WEEK",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OTP_EXPIRE_TIME_TRUNCATED_TO_DAY",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OTP_EXPIRE_TIME_TRUNCATED_TO_HOUR",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ROLE",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileHavingInput",
+          "description": "Conditions for `UserProfile` aggregates.",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "AND",
+              "description": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserProfileHavingInput",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "OR",
+              "description": null,
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserProfileHavingInput",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "sum",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileHavingSumInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "distinctCount",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileHavingDistinctCountInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "min",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileHavingMinInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "max",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileHavingMaxInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "average",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileHavingAverageInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "stddevSample",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileHavingStddevSampleInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "stddevPopulation",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileHavingStddevPopulationInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "varianceSample",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileHavingVarianceSampleInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "variancePopulation",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserProfileHavingVariancePopulationInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileHavingSumInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingDatetimeFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileHavingDistinctCountInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingDatetimeFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileHavingMinInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingDatetimeFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileHavingMaxInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingDatetimeFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileHavingAverageInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingDatetimeFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileHavingStddevSampleInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingDatetimeFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileHavingStddevPopulationInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingDatetimeFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileHavingVarianceSampleInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingDatetimeFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileHavingVariancePopulationInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingBigintFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "HavingDatetimeFilter",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
+          "name": "UserProfilesOrderBy",
+          "description": "Methods to use when ordering `UserProfile`.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "NATURAL",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "NAME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "NAME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "PIC_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "PIC_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "PASSWORD_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "PASSWORD_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "EMAIL_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "EMAIL_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "EMPLOYEE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "EMPLOYEE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ACTIVE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ACTIVE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OTP_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OTP_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OTP_EXPIRE_TIME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "OTP_EXPIRE_TIME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ROLE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "ROLE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "PRIMARY_KEY_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "PRIMARY_KEY_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileCondition",
+          "description": "A condition to be used against `UserProfile` object types. All fields are tested\nfor equality and combined with a logical ‘and.’",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": "Checks for equality with the object’s `id` field.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": "Checks for equality with the object’s `name` field.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "pic",
+              "description": "Checks for equality with the object’s `pic` field.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "password",
+              "description": "Checks for equality with the object’s `password` field.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "email",
+              "description": "Checks for equality with the object’s `email` field.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": "Checks for equality with the object’s `employeeId` field.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "active",
+              "description": "Checks for equality with the object’s `active` field.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": "Checks for equality with the object’s `otp` field.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": "Checks for equality with the object’s `otpExpireTime` field.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Datetime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "role",
+              "description": "Checks for equality with the object’s `role` field.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               },
               "defaultValue": null
@@ -9956,6 +13010,1098 @@
             },
             {
               "name": "SALES_BY_SALES_PERSON_ID_VARIANCE_POPULATION_SALE_DATE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_COUNT_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_COUNT_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_NAME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_NAME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_PIC_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_PIC_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_PASSWORD_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_PASSWORD_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_EMAIL_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_EMAIL_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_EMPLOYEE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_EMPLOYEE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_ACTIVE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_ACTIVE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_OTP_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_OTP_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_OTP_EXPIRE_TIME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_OTP_EXPIRE_TIME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_ROLE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_SUM_ROLE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_NAME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_NAME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_PIC_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_PIC_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_PASSWORD_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_PASSWORD_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_EMAIL_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_EMAIL_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_EMPLOYEE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_EMPLOYEE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_ACTIVE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_ACTIVE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_OTP_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_OTP_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_OTP_EXPIRE_TIME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_OTP_EXPIRE_TIME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_ROLE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_DISTINCT_COUNT_ROLE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_NAME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_NAME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_PIC_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_PIC_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_PASSWORD_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_PASSWORD_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_EMAIL_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_EMAIL_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_EMPLOYEE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_EMPLOYEE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_ACTIVE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_ACTIVE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_OTP_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_OTP_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_OTP_EXPIRE_TIME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_OTP_EXPIRE_TIME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_ROLE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MIN_ROLE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_NAME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_NAME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_PIC_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_PIC_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_PASSWORD_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_PASSWORD_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_EMAIL_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_EMAIL_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_EMPLOYEE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_EMPLOYEE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_ACTIVE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_ACTIVE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_OTP_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_OTP_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_OTP_EXPIRE_TIME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_OTP_EXPIRE_TIME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_ROLE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_MAX_ROLE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_NAME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_NAME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_PIC_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_PIC_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_PASSWORD_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_PASSWORD_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_EMAIL_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_EMAIL_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_EMPLOYEE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_EMPLOYEE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_ACTIVE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_ACTIVE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_OTP_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_OTP_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_OTP_EXPIRE_TIME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_OTP_EXPIRE_TIME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_ROLE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_AVERAGE_ROLE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_NAME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_NAME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_PIC_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_PIC_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_PASSWORD_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_PASSWORD_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_EMAIL_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_EMAIL_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_EMPLOYEE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_EMPLOYEE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_ACTIVE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_ACTIVE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_OTP_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_OTP_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_OTP_EXPIRE_TIME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_OTP_EXPIRE_TIME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_ROLE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_SAMPLE_ROLE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_NAME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_NAME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_PIC_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_PIC_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_PASSWORD_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_PASSWORD_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_EMAIL_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_EMAIL_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_EMPLOYEE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_EMPLOYEE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_ACTIVE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_ACTIVE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_OTP_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_OTP_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_OTP_EXPIRE_TIME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_OTP_EXPIRE_TIME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_ROLE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_STDDEV_POPULATION_ROLE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_NAME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_NAME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_PIC_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_PIC_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_PASSWORD_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_PASSWORD_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_EMAIL_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_EMAIL_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_EMPLOYEE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_EMPLOYEE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_ACTIVE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_ACTIVE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_OTP_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_OTP_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_OTP_EXPIRE_TIME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_OTP_EXPIRE_TIME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_ROLE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_SAMPLE_ROLE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_NAME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_NAME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_PIC_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_PIC_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_PASSWORD_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_PASSWORD_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_EMAIL_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_EMAIL_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_EMPLOYEE_ID_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_EMPLOYEE_ID_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_ACTIVE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_ACTIVE_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_OTP_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_OTP_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_OTP_EXPIRE_TIME_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_OTP_EXPIRE_TIME_DESC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_ROLE_ASC",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "USER_PROFILES_VARIANCE_POPULATION_ROLE_DESC",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -12949,6 +17095,11 @@
               "kind": "OBJECT",
               "name": "Sale",
               "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserProfile",
+              "ofType": null
             }
           ]
         },
@@ -13093,6 +17244,33 @@
               "type": {
                 "kind": "OBJECT",
                 "name": "CreateSalePayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createUserProfile",
+              "description": "Creates a single `UserProfile`.",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CreateUserProfileInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "CreateUserProfilePayload",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -13369,6 +17547,60 @@
               "deprecationReason": null
             },
             {
+              "name": "updateUserProfileByNodeId",
+              "description": "Updates a single `UserProfile` using its globally unique id and a patch.",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "UpdateUserProfileByNodeIdInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UpdateUserProfilePayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateUserProfile",
+              "description": "Updates a single `UserProfile` using a unique key and a patch.",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "UpdateUserProfileInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UpdateUserProfilePayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "deleteCompanyByNodeId",
               "description": "Deletes a single `Company` using its globally unique id.",
               "args": [
@@ -13639,6 +17871,60 @@
               "deprecationReason": null
             },
             {
+              "name": "deleteUserProfileByNodeId",
+              "description": "Deletes a single `UserProfile` using its globally unique id.",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "DeleteUserProfileByNodeIdInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "DeleteUserProfilePayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteUserProfile",
+              "description": "Deletes a single `UserProfile` using a unique key.",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "DeleteUserProfileInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "DeleteUserProfilePayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "upsertCompany",
               "description": "Upserts a single `Company`.",
               "args": [
@@ -13781,6 +18067,43 @@
               "type": {
                 "kind": "OBJECT",
                 "name": "UpsertSalePayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "upsertUserProfile",
+              "description": "Upserts a single `UserProfile`.",
+              "args": [
+                {
+                  "name": "where",
+                  "description": null,
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UpsertUserProfileWhere",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "description": "The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "UpsertUserProfileInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UpsertUserProfilePayload",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -14580,6 +18903,254 @@
                   "name": "Datetime",
                   "ofType": null
                 }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CreateUserProfilePayload",
+          "description": "The output of our create `UserProfile` mutation.",
+          "fields": [
+            {
+              "name": "clientMutationId",
+              "description": "The exact same `clientMutationId` that was provided in the mutation input,\nunchanged and unused. May be used by a client to track mutations.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "userProfile",
+              "description": "The `UserProfile` that was created by this mutation.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfile",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "query",
+              "description": "Our root query field type. Allows us to run any query from our mutation payload.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Query",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employee",
+              "description": "Reads a single `Employee` that is related to this `UserProfile`.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Employee",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "userProfileEdge",
+              "description": "An edge for our `UserProfile`. May be used by Relay 1.",
+              "args": [
+                {
+                  "name": "orderBy",
+                  "description": "The method to use when ordering `UserProfile`.",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "ENUM",
+                        "name": "UserProfilesOrderBy",
+                        "ofType": null
+                      }
+                    }
+                  },
+                  "defaultValue": "[PRIMARY_KEY_ASC]"
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfilesEdge",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CreateUserProfileInput",
+          "description": "All input for the create `UserProfile` mutation.",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "clientMutationId",
+              "description": "An arbitrary string value with no semantic meaning. Will be included in the\npayload verbatim. May be used to track mutations by the client.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "userProfile",
+              "description": "The `UserProfile` to be created by this mutation.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "UserProfileInput",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfileInput",
+          "description": "An input for mutations affecting `UserProfile`",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "pic",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "password",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "email",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "active",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Datetime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "role",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "defaultValue": null
             }
@@ -15672,6 +20243,305 @@
         },
         {
           "kind": "OBJECT",
+          "name": "UpdateUserProfilePayload",
+          "description": "The output of our update `UserProfile` mutation.",
+          "fields": [
+            {
+              "name": "clientMutationId",
+              "description": "The exact same `clientMutationId` that was provided in the mutation input,\nunchanged and unused. May be used by a client to track mutations.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "userProfile",
+              "description": "The `UserProfile` that was updated by this mutation.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfile",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "query",
+              "description": "Our root query field type. Allows us to run any query from our mutation payload.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Query",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employee",
+              "description": "Reads a single `Employee` that is related to this `UserProfile`.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Employee",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "userProfileEdge",
+              "description": "An edge for our `UserProfile`. May be used by Relay 1.",
+              "args": [
+                {
+                  "name": "orderBy",
+                  "description": "The method to use when ordering `UserProfile`.",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "ENUM",
+                        "name": "UserProfilesOrderBy",
+                        "ofType": null
+                      }
+                    }
+                  },
+                  "defaultValue": "[PRIMARY_KEY_ASC]"
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfilesEdge",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UpdateUserProfileByNodeIdInput",
+          "description": "All input for the `updateUserProfileByNodeId` mutation.",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "clientMutationId",
+              "description": "An arbitrary string value with no semantic meaning. Will be included in the\npayload verbatim. May be used to track mutations by the client.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "nodeId",
+              "description": "The globally unique `ID` which will identify a single `UserProfile` to be updated.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "patch",
+              "description": "An object where the defined keys will be set on the `UserProfile` being updated.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "UserProfilePatch",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UserProfilePatch",
+          "description": "Represents an update to a `UserProfile`. Fields that are set will be updated.",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "pic",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "password",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "email",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "employeeId",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "active",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otp",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "otpExpireTime",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "Datetime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "role",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UpdateUserProfileInput",
+          "description": "All input for the `updateUserProfile` mutation.",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "clientMutationId",
+              "description": "An arbitrary string value with no semantic meaning. Will be included in the\npayload verbatim. May be used to track mutations by the client.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "patch",
+              "description": "An object where the defined keys will be set on the `UserProfile` being updated.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "UserProfilePatch",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "BigInt",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "DeleteCompanyPayload",
           "description": "The output of our delete `Company` mutation.",
           "fields": [
@@ -16418,6 +21288,178 @@
         },
         {
           "kind": "OBJECT",
+          "name": "DeleteUserProfilePayload",
+          "description": "The output of our delete `UserProfile` mutation.",
+          "fields": [
+            {
+              "name": "clientMutationId",
+              "description": "The exact same `clientMutationId` that was provided in the mutation input,\nunchanged and unused. May be used by a client to track mutations.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "userProfile",
+              "description": "The `UserProfile` that was deleted by this mutation.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfile",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deletedUserProfileNodeId",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "query",
+              "description": "Our root query field type. Allows us to run any query from our mutation payload.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Query",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employee",
+              "description": "Reads a single `Employee` that is related to this `UserProfile`.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Employee",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "userProfileEdge",
+              "description": "An edge for our `UserProfile`. May be used by Relay 1.",
+              "args": [
+                {
+                  "name": "orderBy",
+                  "description": "The method to use when ordering `UserProfile`.",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "ENUM",
+                        "name": "UserProfilesOrderBy",
+                        "ofType": null
+                      }
+                    }
+                  },
+                  "defaultValue": "[PRIMARY_KEY_ASC]"
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfilesEdge",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeleteUserProfileByNodeIdInput",
+          "description": "All input for the `deleteUserProfileByNodeId` mutation.",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "clientMutationId",
+              "description": "An arbitrary string value with no semantic meaning. Will be included in the\npayload verbatim. May be used to track mutations by the client.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "nodeId",
+              "description": "The globally unique `ID` which will identify a single `UserProfile` to be deleted.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeleteUserProfileInput",
+          "description": "All input for the `deleteUserProfile` mutation.",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "clientMutationId",
+              "description": "An arbitrary string value with no semantic meaning. Will be included in the\npayload verbatim. May be used to track mutations by the client.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "BigInt",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "UpsertCompanyPayload",
           "description": "The output of our upsert `Company` mutation.",
           "fields": [
@@ -16998,6 +22040,152 @@
                 "ofType": {
                   "kind": "INPUT_OBJECT",
                   "name": "SaleInput",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UpsertUserProfilePayload",
+          "description": "The output of our upsert `UserProfile` mutation.",
+          "fields": [
+            {
+              "name": "clientMutationId",
+              "description": "The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "userProfile",
+              "description": "The `UserProfile` that was upserted by this mutation.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfile",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "query",
+              "description": "Our root query field type. Allows us to run any query from our mutation payload.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Query",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "employee",
+              "description": "Reads a single `Employee` that is related to this `UserProfile`.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Employee",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "userProfileEdge",
+              "description": "An edge for our `UserProfile`. May be used by Relay 1.",
+              "args": [
+                {
+                  "name": "orderBy",
+                  "description": "The method to use when ordering `UserProfile`.",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "name": null,
+                      "ofType": {
+                        "kind": "ENUM",
+                        "name": "UserProfilesOrderBy",
+                        "ofType": null
+                      }
+                    }
+                  },
+                  "defaultValue": "[PRIMARY_KEY_ASC]"
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfilesEdge",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UpsertUserProfileWhere",
+          "description": "Where conditions for the upsert `UserProfile` mutation.",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "BigInt",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UpsertUserProfileInput",
+          "description": "All input for the upsert `UserProfile` mutation.",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "clientMutationId",
+              "description": "An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "userProfile",
+              "description": "The `UserProfile` to be upserted by this mutation.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "UserProfileInput",
                   "ofType": null
                 }
               },

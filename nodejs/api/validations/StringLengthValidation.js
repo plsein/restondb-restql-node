@@ -1,7 +1,7 @@
 
 class StringLengthValidation {
 
-  static checkValidation = async function(schema, table, field, data, rule) {
+  static checkValidation = async (schema, table, field, data, rule) => {
     let valid = true;
     // your implementation in here
     if (valid)  {

@@ -1,5 +1,5 @@
 
-const { Utils } = require('../utils/utils');
+const { CommonUtils } = require('../utils/common_utils');
 const { DbAccess } = require('../db/db_access');
 const { Validations } = require('./validations');
 
@@ -7,8 +7,8 @@ class Validate {
 
   static rules = {};
 
-  static getTableRules = async function(table, schema='') {
-    if (table in Validate.rules && Utils.isObject(Validate.rules[table])) {
+  static getTableRules = async (table, schema='') => {
+    if (table in Validate.rules && CommonUtils.isObject(Validate.rules[table])) {
       return Validate.rules[table];
     }
     let comments = await DbAccess.columnComments(table, schema);
@@ -30,11 +30,11 @@ class Validate {
     return Validate.rules[table];
   };
 
-  static check = async function(data, table, schema, checks={}) {
+  static check = async (data, table, schema, checks={}) => {
     let msg = {};
     let idx = 0;
     if (typeof table == 'string' && table.length > 0) {
-      if (table in Validate.rules && Utils.isObject(Validate.rules[table])) {
+      if (table in Validate.rules && CommonUtils.isObject(Validate.rules[table])) {
         checks = Validate.rules[table];
       } else {
         checks = await Validate.getTableRules(table, schema);
@@ -45,10 +45,10 @@ class Validate {
     ) {
       for (const rec of data) {
         msg[''+idx] = {};
-        if (Utils.isObject(rec) && Object.keys(rec).length > 0) {
+        if (CommonUtils.isObject(rec) && Object.keys(rec).length > 0) {
           for (const key of Object.keys(rec)) {
             msg[''+idx][key] = {};
-            if (key in checks && Utils.isObject(checks[key]) && Object.keys(checks[key]).length > 0) {
+            if (key in checks && CommonUtils.isObject(checks[key]) && Object.keys(checks[key]).length > 0) {
               for (const check of Object.keys(checks[key])) {
                 msg[''+idx][key][check] = await Validations[check].checkValidation(schema, table, key, rec[key], checks[key][check]);
                 if (Object.keys(msg[''+idx][key][check]).length < 1) {

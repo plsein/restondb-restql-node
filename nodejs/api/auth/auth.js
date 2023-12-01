@@ -3,7 +3,7 @@
  */
 const jwt = require("jsonwebtoken");
 const { Config } = require('../configs/config');
-const { Utils } = require('../utils/utils');
+const { CommonUtils } = require('../utils/common_utils');
 const { errorHandler } = require('../middlewares/middleware');
 
 class Auth {
@@ -12,7 +12,7 @@ class Auth {
    * Auth token generator
   */
   // app.post("/token", async (req, res, next) => {
-  static #authToken = function(key, secret) {
+  static #authToken = (key, secret) => {
     // Can connect to db as below
     // const pgclient = await getPGPool().connect();
     // const resp = await pgclient.query('SELECT * from table_name');
@@ -22,7 +22,7 @@ class Auth {
         "token": jwt.sign(
           {role: Config['DB_USER'], user_id: 0},  // payload
           Config['JWT_AUTH_SECRET'],
-          {algorithm: "HS256", expiresIn: Config['TOKEN_EXPIRY_SEC']}  // Seconds
+          {algorithm: "HS256", expiresIn: Config['TOKEN_EXPIRY_MILLISEC']}  // Milliseconds
         )
       };
     } else {
@@ -30,11 +30,11 @@ class Auth {
     }
   };
 
-  static getToken = function(req, res, next) {
+  static getToken = (req, res, next) => {
     let key = req.body.key? req.body.key: '';
     let secret = req.body.secret? req.body.secret: '';
     try {
-      return Utils.sendResponse(res, Auth.#authToken(key, secret));
+      return CommonUtils.sendResponse(res, Auth.#authToken(key, secret));
     } catch(err) {
       err['status'] = 401;
       errorHandler(err, req, res, next);

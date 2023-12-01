@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 const { errorHandler } = require('../middlewares/middleware');
 const { PGSelectQueryBuilder } = require('../db/pg_select_query_builder');
 const { DbAccess } = require('../db/db_access');
-const { Utils } = require('../utils/utils');
+const { CommonUtils } = require('../utils/common_utils');
 const { Validate } = require('../validations/validate');
 
 class Service {
@@ -10,23 +10,24 @@ class Service {
   /**
    * Select api.
    * Sample input json: {
-   *   "fields": ["sum(z.zone_id) as sum_zone_id", "sum(z.zone_id)/2 as half_sum_zone_id", "cr.region_name as region_name", "csp.provider_name"],
-   *   "table": "zones z",
-   *   "inner": ["cloud_regions cr on cr.region_id = z.region_id"],
-   *   "left": ["cloud_service_providers csp on csp.provider_id = cr.provider_id"],
-   *   "where": "z.zone_id > 0",
-   *   "group": ["z.zone_id", "cr.region_name", "csp.provider_name"],
-   *   "having": "sum(z.zone_id) > 100",
-   *   "sort": ["z.zone_name asc"],
+   *   "fields": ["sum(s.price) as total_sales", "avg(s.price) as average_sales", "d.department_name as department", "e.employee_name"],
+   *   "table": "employee e",
+   *   "inner": [{"table": "department d", "relation": "e.department_id = d.department_id"}],
+   *   "left": [{"table": "sales s", "relation": "s.sales_person_id = e.employee_id and s.sale_date >= :sale_date"}],
+   *   "where": "e.employee_id in (:employee_ids) and e.employee_name like :employee_name and e.status = :status and e.joining_date >= :joining_date",
+   *   "group": ["d.department_name", "e.employee_name"],
+   *   "having": "sum(s.price) >= :price",
+   *   "sort": ["sum(s.price) asc"],
+   *   "bind": {"employee_ids": [1,2], "employee_name": "%e%", "status": true, "joining_date": "2020-01-01", "price": 100, "sale_date": "2023-10-01"},
    *   "limit": 2,
-   *   "offset": 1
+   *   "offset": 0
    * }
    * @param {*} req request object
    * @param {*} res response object
    * @param {*} next callback
    * @returns JSON object
    */
-  static select = async function(req, res, next) {
+  static select = async (req, res, next) => {
     let params = {};
     params['fields'] = req.body.fields? req.body.fields: ['*'];
     params['table'] = req.body.table? req.body.table: '';
@@ -43,33 +44,35 @@ class Service {
     let resp = {};
     resp = await PGSelectQueryBuilder.build(params);
     if (Object.keys(resp['msg']).length > 0) {
-      return Utils.sendResponse(res, data, 400, resp['msg']);
+      return CommonUtils.sendResponse(res, data, 400, resp['msg']);
     }
     if (resp['sql_query'].length > 0) {
       try {
-        let bind_params = ('bind_params' in resp && Utils.isObject(resp['bind_params']))? resp['bind_params'] : {};
+        let bind_params = ('bind_params' in resp && CommonUtils.isObject(resp['bind_params']))? resp['bind_params'] : {};
         data = await DbAccess.selectData(resp['sql_query'], bind_params);
-        data = (typeof data[1] !== 'undefined' && 'rows' in data[1])? data[1]['rows'] : data;
+        data = (typeof data !== 'undefined' && typeof data[1] !== 'undefined' && 'rows' in data[1])? data[1]['rows'] : data;
       } catch(err) {
         err['status'] = 400;
         err['msg'] = err.message;
         return errorHandler(err, req, res, next);
       }
-      return Utils.sendResponse(res, data);
+      return CommonUtils.sendResponse(res, data);
     }
-    return Utils.sendResponse(res, data, 400, {"error":"Data Error"});
+    return CommonUtils.sendResponse(res, data, 400, {"error":"Data Error"});
   };
 
   /**
    * Add api.
    * Sample input json: {
-   *   "table": "zones",
+   *   "table": "test_data",
    *   "records": [{
-   *     "zone_name": "test zone 104",
-   *     "region_id": 41
+   *     "test_name": "test name 102",
+   *     "test_date": "2023-10-10",
+   *     "status": true
    *   },{
-   *     "zone_name": "test zone 105",
-   *     "region_id": 41
+   *     "test_name": "test name 103",
+   *     "test_date": "2023-10-10",
+   *     "status": true
    *   }]
    * }
    * @param {*} req request object
@@ -77,7 +80,7 @@ class Service {
    * @param {*} next callback
    * @returns JSON object
    */
-  static add = async function(req, res, next) {
+  static add = async (req, res, next) => {
     let schema = (req.body.schema)? req.body.schema : '';
     let table = req.body.table? req.body.table: '';
     let records = req.body.records? req.body.records: [];
@@ -98,8 +101,8 @@ class Service {
     // rules = await Validate.getTableRules(table, schema);
     // for (const record of records) {
     // if (isObject(rules) && Object.keys(rules).length > 0) {
-    vmsg = await Validate.check(records, table);  // rules
-    if (Utils.isObject(vmsg) && Object.keys(vmsg).length > 0) {
+    vmsg = await Validate.check(records, table, schema);  // rules
+    if (CommonUtils.isObject(vmsg) && Object.keys(vmsg).length > 0) {
       msg['validations'] = vmsg;
       vmsg = null;
     }
@@ -122,29 +125,29 @@ class Service {
         err['msg'] = err.message;
         return errorHandler(err, req, res, next);
       }
-      return Utils.sendResponse(res, data);
+      return CommonUtils.sendResponse(res, data);
     }
-    return Utils.sendResponse(res, data, 400, {"error":"Data Error"});
+    return CommonUtils.sendResponse(res, data, 400, {"error":"Data Error"});
   };
 
   /**
    * Edit api.
    * Sample input json: {
    *   "objects": [{
-   *     "table": "zones",
-   *     "where": "zone_id=158",
-   *     "bind": {"zone_id": 158},
+   *     "table": "test_data",
+   *     "where": "test_id=157",
+   *     "bind": {"test_id": 5},
    *     "record":{
-   *       "zone_name": "test zone 108",
-   *       "region_id": 41
+   *       "test_name": "test name 103",
+   *       "test_date": "2023-11-10"
    *     }
    *   }, {
-   *     "table": "zones",
-   *     "where": "zone_id=159",
-   *     "bind": {"zone_id": 159},
+   *     "table": "test_data",
+   *     "where": "test_id=158",
+   *     "bind": {"test_id": 6},
    *     "record": {
-   *       "zone_name": "test zone 109",
-   *       "region_id": 41
+   *       "test_name": "test name 104",
+   *       "test_date": "2023-11-14"
    *     }
    *   }]
    * }
@@ -153,7 +156,7 @@ class Service {
    * @param {*} next callback
    * @returns JSON object
    */
-  static edit = async function(req, res, next) {
+  static edit = async (req, res, next) => {
     let objects = req.body.objects? req.body.objects: [];
     let msg = {};
     let data = [];
@@ -171,19 +174,19 @@ class Service {
         let record = (objects[obj]['record'])? objects[obj]['record'] : {};
         let bind_params = (objects[obj]['bind'])? objects[obj]['bind']: {};
         let schemaTable = table;
-        if (!(typeof schema == 'string')) {
+        if (typeof schema != 'string') {
           msg[''+idx]['schema'] = "schema must be present as a string";
         }
-        if (!(typeof table == 'string') || table.length < 1) {
+        if (typeof table != 'string' || table.length < 1) {
           msg[''+idx]['table'] = "table must be present as a string";
         }
-        if (!(typeof where == 'string') || Utils.escapeString(where).length < 1) {
+        if (typeof where != 'string' || CommonUtils.escapeString(where).length < 1) {
           msg[''+idx]['where'] = "where must be present as a string";
         }
-        if (!(typeof record == 'object') || Object.keys(record).length < 1) {
+        if (typeof record != 'object' || Object.keys(record).length < 1) {
           msg[''+idx]['record'] = "record must be present as key value pairs";
         }
-        if (!(typeof bind_params == 'object')) {  // || Object.keys(bind_params).length < 1
+        if (typeof bind_params != 'object') {  // || Object.keys(bind_params).length < 1
           msg[''+idx]['record'] = "bind must be present as key value pairs";
         }
         // data validation
@@ -192,7 +195,7 @@ class Service {
         // }
         // if (isObject(rules[table]) && Object.keys(rules[table]).length > 0) {
         vmsg[''+idx] = await Validate.check([record], table);  // rules[table]
-        if (Utils.isObject(vmsg[''+idx]) && Object.keys(vmsg[''+idx]).length > 0) {
+        if (CommonUtils.isObject(vmsg[''+idx]) && Object.keys(vmsg[''+idx]).length > 0) {
           msg[''+idx]['validations'] = vmsg[''+idx][0];
           delete vmsg[''+idx];
         }
@@ -209,7 +212,7 @@ class Service {
         idx = idx + 1;
       }
       if (Object.keys(msg).length < 1) {
-        return Utils.sendResponse(res, data);
+        return CommonUtils.sendResponse(res, data);
       }
     }
     if (Object.keys(msg).length > 0) {
@@ -218,19 +221,20 @@ class Service {
       err['msg'] = msg;
       return errorHandler(err, req, res, next);
     }
-    return Utils.sendResponse(res, data, 400, {"error":"Data Error"});
+    return CommonUtils.sendResponse(res, data, 400, {"error":"Data Error"});
   };
 
   /**
    * Remove api.
    * Sample input json: {
    *   "objects":[{
-   *     "table": "zones",
-   *     "where": "zone_id IN ('136', '137')",
-   *     "bind": {"zone_id": [158, 159]}
-   *   },{
-   *     "table": "zones",
-   *     "where": "zone_id IN ('138', '139')"
+   *     "table": "test_data",
+   *     "where": "test_id IN ('138', '139')"
+   *   },
+   *   {
+   *     "table": "test_data",
+   *     "where": "test_id IN ('136', '137')",
+   *     "bind": {"test_id": [5, 6]}
    *   }]
    * }
    * @param {*} req request object
@@ -238,7 +242,7 @@ class Service {
    * @param {*} next callback
    * @returns JSON object
    */
-  static remove = async function(req, res, next) {
+  static remove = async (req, res, next) => {
     let objects = req.body.objects? req.body.objects: [];
     let msg = {};
     let data = [];
@@ -253,13 +257,13 @@ class Service {
         let table = (objects[obj]['table'])? objects[obj]['table'] : '';
         let where = (objects[obj]['where'])? objects[obj]['where'] : '';
         let bind_params = (objects[obj]['bind'])? objects[obj]['bind']: {};
-        if (!(typeof table == 'string') || table.length < 1) {
+        if (typeof table != 'string' || table.length < 1) {
           msg[''+idx]['table'] = "table must be present as a string";
         }
-        if (!(typeof where == 'string') || Utils.escapeString(where).length < 1) {
+        if (typeof where != 'string' || CommonUtils.escapeString(where).length < 1) {
           msg[''+idx]['where'] = "where must be present as a string";
         }
-        if (!(typeof bind_params == 'object')) {
+        if (typeof bind_params != 'object') {
           msg[''+idx]['record'] = "bind must be present as key value pairs";
         }
         if (!msg[''+idx] || Object.keys(msg[''+idx]).length < 1) {
@@ -272,7 +276,7 @@ class Service {
         }
       }
       if (Object.keys(msg).length < 1) {
-        return Utils.sendResponse(res, []);
+        return CommonUtils.sendResponse(res, []);
       }
     }
     if (Object.keys(msg).length > 0) {
@@ -281,7 +285,7 @@ class Service {
       err['msg'] = msg;
       return errorHandler(err, req, res, next);
     }
-    return Utils.sendResponse(res, data, 400, {"error":"Data Error"}, data);
+    return CommonUtils.sendResponse(res, data, 400, {"error":"Data Error"}, data);
   };
 
 }

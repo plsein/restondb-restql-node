@@ -1,5 +1,5 @@
 
-const { Utils } = require('../utils/utils');
+const { CommonUtils } = require('../utils/common_utils');
 const { DbAccess } = require('./db_access');
 
 /**
@@ -38,8 +38,8 @@ class SelectQueryBuilder {
    * @param res object
    * @returns object
    */
-  static mergeResp = async function(resp, res) {
-    if(Utils.isObject(resp) && Utils.isObject(res)) {
+  static mergeResp = async (resp, res) => {
+    if(CommonUtils.isObject(resp) && CommonUtils.isObject(res)) {
       if ('msg' in resp && 'msg' in res) {
         resp['msg'] = Object.assign(resp['msg'], res['msg']);
       }
@@ -54,7 +54,7 @@ class SelectQueryBuilder {
   /**
    * All Tables
    */
-  static tables = async function() {
+  static tables = async () => {
     if (this._allTableNames.length > 0) {
       return this._allTableNames;
     } else {
@@ -68,7 +68,7 @@ class SelectQueryBuilder {
    * Restrict tables access
    * @returns boolean
    */
-  static restrictTablesAccess = async function(table) {
+  static restrictTablesAccess = async (table) => {
     table = (table.includes(' '))? table.substring(0, table.indexOf(' ')).trim() : table.trim();
     if (table.length > 0) {
       if (this._restrictTables) {
@@ -86,10 +86,10 @@ class SelectQueryBuilder {
    * @param retTableName boolean
    * @returns array
    */
-  static table = async function(table, retTableName=false) {
+  static table = async (table, retTableName=false) => {
     let resp = this._initialResp;
     if ((typeof table == 'string')) {
-      let sql_table = Utils.escapeString(table);
+      let sql_table = CommonUtils.escapeString(table);
       if (sql_table.length > 0) {
         if (! await this.restrictTablesAccess(sql_table)) {
           resp['msg']['table'] = "can't access internal table";
@@ -113,7 +113,7 @@ class SelectQueryBuilder {
    * @param table string
    * @returns array
    */
-  static select = async function(fields, table) {
+  static select = async (fields, table) => {
     let resp = this._initialResp;
     let res = await this.table(table);
     resp = await this.mergeResp(resp, res);
@@ -122,7 +122,7 @@ class SelectQueryBuilder {
     if(!Array.isArray(fields)) {
       resp['msg']['fields'] = "fields must be an array";
     } else if(fields.length > 0) {
-      let sql_fields = Utils.escapeString(fields.join(', '));
+      let sql_fields = CommonUtils.escapeString(fields.join(', '));
       sql_fields = (sql_fields.trim().length > 0)? sql_fields : '*';
       resp['sql_query'] = "SELECT " + sql_fields + " FROM " + sql_table;
     }
@@ -135,15 +135,15 @@ class SelectQueryBuilder {
    * @param inner array
    * @return array
    */
-  static inner = async function(resp, inner) {
+  static inner = async (resp, inner) => {
     if(!Array.isArray(inner)) {
       resp['msg']['inner'] = "inner must be an array";
     } else if(inner.length > 0) {
-      let sql_inner = ' ';   // Utils.escapeString(inner.join(' '));
+      let sql_inner = ' ';   // CommonUtils.escapeString(inner.join(' '));
       for (const inner_table of inner) {
-        if (Utils.isObject(inner_table) && Object.keys(inner_table).includes('table') && Object.keys(inner_table).includes('relation')) {
+        if (CommonUtils.isObject(inner_table) && Object.keys(inner_table).includes('table') && Object.keys(inner_table).includes('relation')) {
           let inner_table_name = await this.table(inner_table['table'], true);
-          let inner_table_rel = Utils.escapeString(inner_table['relation']);
+          let inner_table_rel = CommonUtils.escapeString(inner_table['relation']);
           if (inner_table_name.length > 0 && inner_table_rel.length > 0) {
             sql_inner = sql_inner + " INNER JOIN " + inner_table_name + " ON " + inner_table_rel;
           }
@@ -166,15 +166,15 @@ class SelectQueryBuilder {
    * @param left array
    * @return array
    */
-  static left = async function(resp, left) {
+  static left = async (resp, left) => {
     if(!Array.isArray(left)) {
       resp['msg']['left'] = "left must be an array";
     } else if(left.length > 0) {
       let sql_left = ' ';
       for (const left_table of left) {
-        if (Utils.isObject(left_table) && Object.keys(left_table).includes('table') && Object.keys(left_table).includes('relation')) {
+        if (CommonUtils.isObject(left_table) && Object.keys(left_table).includes('table') && Object.keys(left_table).includes('relation')) {
           let left_table_name = await this.table(left_table['table'], true);
-          let left_table_rel = Utils.escapeString(left_table['relation']);
+          let left_table_rel = CommonUtils.escapeString(left_table['relation']);
           if (left_table_name.length > 0 && left_table_rel.length > 0) {
             sql_left = sql_left + " LEFT JOIN " + left_table_name + " ON " + left_table_rel;
           }
@@ -197,11 +197,11 @@ class SelectQueryBuilder {
    * @param where string
    * @return array
    */
-  static where = async function(resp, where) {
-    if (!(typeof where == 'string')) {
+  static where = async (resp, where) => {
+    if (typeof where != 'string') {
       resp['msg']['where'] = "where must be a string";
     } else if (where.length > 0) {
-      let sql_where = Utils.escapeString(where);
+      let sql_where = CommonUtils.escapeString(where);
       if (sql_where.trim().length > 0) {
         resp['sql_query'] = resp['sql_query'] + " WHERE " + sql_where;
       } else {
@@ -217,11 +217,11 @@ class SelectQueryBuilder {
    * @param group array
    * @return array
    */
-  static group = async function(resp, group) {
+  static group = async (resp, group) => {
     if (!Array.isArray(group)) {
       resp['msg']['group'] = "group must be an array";
     } else if(group.length > 0) {
-      let sql_group = Utils.escapeString(group.join(', '));
+      let sql_group = CommonUtils.escapeString(group.join(', '));
       if (sql_group.trim().length > 0) {
         resp['sql_query'] = resp['sql_query'] + " GROUP BY " + sql_group;
       } else {
@@ -237,11 +237,11 @@ class SelectQueryBuilder {
    * @param having string
    * @return array
    */
-  static having = async function(resp, having) {
-    if (!(typeof having == 'string')) {
+  static having = async (resp, having) => {
+    if (typeof having != 'string') {
       resp['msg']['having'] = "having must be a string";
     } else if (having.length > 0) {
-      let sql_having = Utils.escapeString(having);
+      let sql_having = CommonUtils.escapeString(having);
       if (sql_having.trim().length > 0) {
         resp['sql_query'] = resp['sql_query'] + " HAVING " + sql_having;
       } else {
@@ -257,11 +257,11 @@ class SelectQueryBuilder {
    * @param sort array
    * @return array
    */
-  static sort = async function(resp, sort) {
+  static sort = async (resp, sort) => {
     if (!Array.isArray(sort)) {
       resp['msg']['sort'] = "sort must be an array";
     } else if(sort.length > 0) {
-      let sql_sort = Utils.escapeString(sort.join(', '));
+      let sql_sort = CommonUtils.escapeString(sort.join(', '));
       if (sql_sort.trim().length > 0) {
         resp['sql_query'] = resp['sql_query'] + " ORDER BY " + sql_sort;
       } else {
@@ -277,7 +277,7 @@ class SelectQueryBuilder {
    * @param limit array
    * @return array
    */
-  static limit = async function(resp, limit) {
+  static limit = async (resp, limit) => {
     if ((typeof limit == 'string' || typeof limit == 'number') && !isNaN(parseInt(limit, 10))) {
       limit = parseInt(limit, 10);
       if(limit > 0) {
@@ -299,7 +299,7 @@ class SelectQueryBuilder {
    * @param offset array
    * @return array
    */
-  static offset = async function(resp, offset) {
+  static offset = async (resp, offset) => {
     if ((typeof offset == 'string' || typeof offset == 'number') && !isNaN(parseInt(offset, 10))) {
       offset = parseInt(offset, 10);
       if(offset >= 0) {
@@ -319,8 +319,8 @@ class SelectQueryBuilder {
    * @param bind array
    * @return array
    */
-  static bind = async function(resp, bind) {
-    if (bind && Utils.isObject(bind) && Object.keys(bind).length > 0) {
+  static bind = async (resp, bind) => {
+    if (bind && CommonUtils.isObject(bind) && Object.keys(bind).length > 0) {
       resp['bind_params'] = bind;
     } else {
       resp['msg']['bind'] = "bind must be key value pairs";
@@ -333,7 +333,7 @@ class SelectQueryBuilder {
    * @param params array
    * return array
    */
-  static build = async function(params) {
+  static build = async (params) => {
     let resp = [];
     for (const fn of this._selectClauseFnSeq) {
       if (fn == 'select') {
