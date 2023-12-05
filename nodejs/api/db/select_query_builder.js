@@ -6,7 +6,7 @@ const { DbAccess } = require('./db_access');
  * Select Query SQL Builder
  */
 class SelectQueryBuilder {
-  
+
   /**
    * Restrict tables
    */
@@ -322,7 +322,7 @@ class SelectQueryBuilder {
   static bind = async (resp, bind) => {
     if (bind && CommonUtils.isObject(bind) && Object.keys(bind).length > 0) {
       resp['bind_params'] = bind;
-    } else {
+    } else if (bind && !CommonUtils.isObject(bind)) {
       resp['msg']['bind'] = "bind must be key value pairs";
     }
     return resp;
