@@ -18,11 +18,6 @@ class SelectQueryBuilder {
   static _sqlDefaultLimit = 10;
 
   /**
-   * Initial response
-   */
-  static _initialResp = {'msg':{}, 'sql_query':''};
-
-  /**
    * Functions for select clauses
    */
   static _selectClauseFnSeq = ['select', 'inner', 'left', 'where', 'group', 'having', 'sort', 'limit', 'offset', 'bind'];
@@ -31,6 +26,11 @@ class SelectQueryBuilder {
    * All table names
    */
   static _allTableNames = [];
+
+  /**
+   * Initial response
+   */
+  static _initialResp = () => { return {'msg':{}, 'sql_query':''} };
 
   /**
    * Merge two objects
@@ -87,7 +87,7 @@ class SelectQueryBuilder {
    * @returns array
    */
   static table = async (table, retTableName=false) => {
-    let resp = this._initialResp;
+    let resp = this._initialResp();
     if ((typeof table == 'string')) {
       let sql_table = CommonUtils.escapeString(table);
       if (sql_table.length > 0) {
@@ -114,7 +114,7 @@ class SelectQueryBuilder {
    * @returns array
    */
   static select = async (fields, table) => {
-    let resp = this._initialResp;
+    let resp = this._initialResp();
     let res = await this.table(table);
     resp = await this.mergeResp(resp, res);
     let table_name = await this.table(table, true);
