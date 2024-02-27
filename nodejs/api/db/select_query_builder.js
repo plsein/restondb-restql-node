@@ -69,7 +69,7 @@ class SelectQueryBuilder {
    * @returns boolean
    */
   static restrictTablesAccess = async (table) => {
-    table = (table.includes(' '))? table.substring(0, table.indexOf(' ')).trim() : table.trim();
+    table = (table.includes(' '))? table.substring(0, table.indexOf(' ')).trim().replaceAll('"','') : table.trim().replaceAll('"','');
     if (table.length > 0) {
       if (this._restrictTables) {
         let tableNames = await this.tables();
